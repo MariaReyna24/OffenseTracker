@@ -7,15 +7,47 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
+    @ObservedObject var vm = OffenseViewModel()
+    @State var showingSheet = false
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            ZStack {
+                Image(.kingSloth)
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+                VStack {
+                    List {
+                        ForEach(vm.offenses) { offense in
+                            Text(offense.name)
+                        } .onDelete(perform: { indexSet in
+                            vm.offenses.remove(atOffsets: indexSet)
+                            vm.saveOffenses()
+                        })
+                    }
+                    .padding()
+                    .scrollContentBackground(.hidden)
+                    Button("Add offense") {
+                        showingSheet.toggle()
+                    }
+                    .font(.system(size: 35))
+                    .foregroundStyle(.white)
+                    .buttonStyle(.borderedProminent)
+                    .padding(.all)
+                    .padding()
+                    .tint(.black)
+                    .sheet(isPresented: $showingSheet){
+                        sheetVIew(vm: vm)
+                            .presentationDetents([.fraction(0.20)])
+                            .presentationDragIndicator(.visible)
+                    }
+                }.onAppear {
+                    vm.loadOffenses()
+                }
+            }
         }
-        .padding()
     }
 }
 
