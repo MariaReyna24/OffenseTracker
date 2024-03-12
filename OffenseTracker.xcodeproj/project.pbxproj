@@ -16,6 +16,10 @@
 		A27589B82B7AD6B000B39EC1 /* OffenseTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27589B72B7AD6B000B39EC1 /* OffenseTrackerUITestsLaunchTests.swift */; };
 		A27589C52B7AD85600B39EC1 /* Offense.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27589C42B7AD85600B39EC1 /* Offense.swift */; };
 		A27589C72B7ADB6800B39EC1 /* sheetVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27589C62B7ADB6800B39EC1 /* sheetVIew.swift */; };
+		A291860E2B9F3A60007B8206 /* Confirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A291860D2B9F3A60007B8206 /* Confirmation.swift */; };
+		A29186802BA090DB007B8206 /* Vortex in Frameworks */ = {isa = PBXBuildFile; productRef = A291867F2BA090DB007B8206 /* Vortex */; };
+		A29186BA2BA0AF60007B8206 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29186B92BA0AF60007B8206 /* SoundManager.swift */; };
+		A29186BC2BA0C983007B8206 /* sus.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A29186BB2BA0C983007B8206 /* sus.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A222DE732B893E4400575D66 /* OffenseTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OffenseTracker.entitlements; sourceTree = "<group>"; };
 		A27589972B7AD6AF00B39EC1 /* OffenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OffenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A275899A2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffenseTrackerApp.swift; sourceTree = "<group>"; };
 		A275899C2B7AD6AF00B39EC1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,6 +53,9 @@
 		A27589B72B7AD6B000B39EC1 /* OffenseTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffenseTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A27589C42B7AD85600B39EC1 /* Offense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offense.swift; sourceTree = "<group>"; };
 		A27589C62B7ADB6800B39EC1 /* sheetVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sheetVIew.swift; sourceTree = "<group>"; };
+		A291860D2B9F3A60007B8206 /* Confirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confirmation.swift; sourceTree = "<group>"; };
+		A29186B92BA0AF60007B8206 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		A29186BB2BA0C983007B8206 /* sus.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sus.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A29186802BA090DB007B8206 /* Vortex in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,9 +107,13 @@
 		A27589992B7AD6AF00B39EC1 /* OffenseTracker */ = {
 			isa = PBXGroup;
 			children = (
+				A222DE732B893E4400575D66 /* OffenseTracker.entitlements */,
+				A29186BB2BA0C983007B8206 /* sus.mp3 */,
 				A275899A2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift */,
 				A275899C2B7AD6AF00B39EC1 /* ContentView.swift */,
+				A29186B92BA0AF60007B8206 /* SoundManager.swift */,
 				A27589C62B7ADB6800B39EC1 /* sheetVIew.swift */,
+				A291860D2B9F3A60007B8206 /* Confirmation.swift */,
 				A27589C42B7AD85600B39EC1 /* Offense.swift */,
 				A275899E2B7AD6B000B39EC1 /* Assets.xcassets */,
 				A27589A02B7AD6B000B39EC1 /* Preview Content */,
@@ -149,6 +162,9 @@
 			dependencies = (
 			);
 			name = OffenseTracker;
+			packageProductDependencies = (
+				A291867F2BA090DB007B8206 /* Vortex */,
+			);
 			productName = OffenseTracker;
 			productReference = A27589972B7AD6AF00B39EC1 /* OffenseTracker.app */;
 			productType = "com.apple.product-type.application";
@@ -221,6 +237,9 @@
 				Base,
 			);
 			mainGroup = A275898E2B7AD6AF00B39EC1;
+			packageReferences = (
+				A291867E2BA090DB007B8206 /* XCRemoteSwiftPackageReference "Vortex" */,
+			);
 			productRefGroup = A27589982B7AD6AF00B39EC1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -237,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A29186BC2BA0C983007B8206 /* sus.mp3 in Resources */,
 				A27589A22B7AD6B000B39EC1 /* Preview Assets.xcassets in Resources */,
 				A275899F2B7AD6B000B39EC1 /* Assets.xcassets in Resources */,
 			);
@@ -265,8 +285,10 @@
 			files = (
 				A27589C52B7AD85600B39EC1 /* Offense.swift in Sources */,
 				A275899D2B7AD6AF00B39EC1 /* ContentView.swift in Sources */,
+				A291860E2B9F3A60007B8206 /* Confirmation.swift in Sources */,
 				A27589C72B7ADB6800B39EC1 /* sheetVIew.swift in Sources */,
 				A275899B2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift in Sources */,
+				A29186BA2BA0AF60007B8206 /* SoundManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +449,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OffenseTracker/OffenseTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OffenseTracker/Preview Content\"";
@@ -445,9 +468,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = m.OffenseTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -456,6 +483,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OffenseTracker/OffenseTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OffenseTracker/Preview Content\"";
@@ -474,9 +502,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = m.OffenseTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -596,6 +628,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A291867E2BA090DB007B8206 /* XCRemoteSwiftPackageReference "Vortex" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/Vortex";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A291867F2BA090DB007B8206 /* Vortex */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A291867E2BA090DB007B8206 /* XCRemoteSwiftPackageReference "Vortex" */;
+			productName = Vortex;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A275898F2B7AD6AF00B39EC1 /* Project object */;
 }

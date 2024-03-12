@@ -6,29 +6,19 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Offense: Identifiable, Codable, Equatable {
-    var id = UUID()
-    let name: String
-}
-class OffenseViewModel: ObservableObject {
-    @Published var offenses = [Offense]()
-    let defaults = UserDefaults.standard
-    func addOffense(name: String) {
-        let offense = Offense(name: name)
-        offenses.append(offense)
-    }
-    func saveOffenses() {
-        let data = try? JSONEncoder().encode(offenses)
-        UserDefaults.standard.set(data, forKey: "Offenses")
+@Model
+class Offenses {
+    var name: String
+    var date: Date
+    init(name: String = "", date: Date = Date.now) {
+        self.name = name
+        self.date = date
     }
     
-    func loadOffenses() {
-        if let data = UserDefaults.standard.data(forKey: "Offenses"),
-           let savedOffenses = try? JSONDecoder().decode([Offense].self, from: data) {
-            offenses = savedOffenses
-        }
-    }
 }
+
+
 
 

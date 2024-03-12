@@ -6,13 +6,25 @@
 //
 
 import SwiftUI
-
+import SwiftData
+import AVFoundation
 
 struct ContentView: View {
-    @ObservedObject var vm = OffenseViewModel()
+    @Query var offense: [Offenses]
     @State var showingSheet = false
+    @Environment(\.modelContext) var modelContext
+    @State var isCopShowing = false
+    @ObservedObject var sounds = SoundManager()
     var body: some View {
-        NavigationStack {
+        if isCopShowing {
+            Confirmation()
+                .onAppear{
+                    sounds.playSound()
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.5, execute: {
+                        self.isCopShowing.toggle()
+                    })
+                }
+        } else {
             ZStack {
                 Image(.kingSloth)
                     .resizable()
@@ -20,15 +32,13 @@ struct ContentView: View {
                     .ignoresSafeArea()
                 VStack {
                     List {
-                        ForEach(vm.offenses) { offense in
-                            Text(offense.name)
-                        } .onDelete(perform: { indexSet in
-                            vm.offenses.remove(atOffsets: indexSet)
-                            vm.saveOffenses()
-                        })
+                        ForEach(offense) { off in
+                            Text("\(off.name) on \(off.date.formatted(date: .long, time: .shortened)) ")
+                        } .onDelete(perform: delteOffense)
                     }
                     .padding()
                     .scrollContentBackground(.hidden)
+                   
                     Button("Add offense") {
                         showingSheet.toggle()
                     }
@@ -39,18 +49,31 @@ struct ContentView: View {
                     .padding()
                     .tint(.black)
                     .sheet(isPresented: $showingSheet){
-                        sheetVIew(vm: vm)
+                        sheetVIew(off: Offenses(), isCopShowing: $isCopShowing)
                             .presentationDetents([.fraction(0.20)])
                             .presentationDragIndicator(.visible)
                     }
-                }.onAppear {
-                    vm.loadOffenses()
                 }
             }
+            
+        }
+    }
+    func delteOffense(_ indexSet: IndexSet){
+        for index in indexSet {
+            let offense = offense[index]
+            modelContext.delete(offense)
         }
     }
 }
 
 #Preview {
-    ContentView()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Offenses.self, configurations: config)
+        //let example = Offenses(name: "Example Offense")
+        return ContentView()
+            .modelContainer(container)
+    } catch {
+        fatalError("Failed to create a model container")
+    }
 }

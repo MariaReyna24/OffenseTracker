@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct sheetVIew: View {
+    @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var vm = OffenseViewModel()
-    @State private var newOffense = ""
+    @Bindable var off: Offenses
+    @State var newOffense = ""
+    @Binding var isCopShowing: Bool
     var body: some View {
         ZStack{
             Image(.slothArmy)
@@ -22,11 +25,9 @@ struct sheetVIew: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 Button(action: {
-                    vm.addOffense(name: newOffense)
-                    vm.saveOffenses()
-                    newOffense = ""
+                    modelContext.insert(Offenses(name: newOffense,date: Date.now))
                     dismiss()
-                    
+                    isCopShowing.toggle()
                 }) {
                     Text("Offense taken note")
                     
@@ -37,9 +38,27 @@ struct sheetVIew: View {
                     .cornerRadius(50)
             }
         }
+       
+    }
+    func addSamples() {
+        let mean = Offenses(name:"Shes mean")
+        let shake = Offenses(name: "She burnt my shake")
+        let money = Offenses(name: "money money")
+        
+        modelContext.insert(mean)
+        modelContext.insert(shake)
+        modelContext.insert(money)
     }
 }
 
 #Preview {
-    sheetVIew()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Offenses.self, configurations: config)
+        let example = Offenses(name: "Example Offense")
+        return sheetVIew(off: example, isCopShowing: .constant(false))
+            .modelContainer(container)
+    } catch {
+        fatalError("Failed to create a model container")
+    }
 }
