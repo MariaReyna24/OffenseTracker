@@ -8,7 +8,6 @@ import SwiftUI
 import AVFoundation
 
 class SoundManager: ObservableObject {
-   // static let instance = SoundManager()
     var player: AVAudioPlayer?
     
     func playSound() {

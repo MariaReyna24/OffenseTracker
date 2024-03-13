@@ -38,7 +38,6 @@ struct ContentView: View {
                     }
                     .padding()
                     .scrollContentBackground(.hidden)
-                   
                     Button("Add offense") {
                         showingSheet.toggle()
                     }
