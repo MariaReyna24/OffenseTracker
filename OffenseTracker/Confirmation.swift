@@ -4,7 +4,9 @@
 //
 //  Created by Maria Reyna on 3/11/24.
 //
-//make this an alert screen to confirm the offense was taken
+//
+// make this an alert screen to confirm the offense was taken
+
 import SwiftUI
 import Vortex
 
@@ -17,7 +19,7 @@ struct Confirmation: View {
             Color.black
                 .ignoresSafeArea()
             VStack() {
-                    VortexView(.fire) {
+                VortexView(.fire) {
                         RoundedRectangle(cornerRadius: 250)
                             .fill(.red)
                             .blendMode(.plusLighter)

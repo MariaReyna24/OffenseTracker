@@ -20,8 +20,10 @@ struct ContentView: View {
             Confirmation()
                 .onAppear{
                     sounds.playSound()
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.5, execute: {
-                        self.isCopShowing.toggle()
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
+                        withAnimation(.easeOut(duration: 2)) {
+                            self.isCopShowing.toggle()
+                        }
                     })
                 }
         } else {

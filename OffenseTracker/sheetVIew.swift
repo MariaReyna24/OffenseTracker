@@ -27,18 +27,21 @@ struct sheetVIew: View {
                 Button(action: {
                     modelContext.insert(Offenses(name: newOffense,date: Date.now))
                     dismiss()
-                    isCopShowing.toggle()
+                    withAnimation(.easeInOut(duration: 2)) {
+                        isCopShowing.toggle()
+                    }
+                    
                 }) {
                     Text("Offense taken note")
                     
                 }
                 .foregroundStyle(.white)
-                    .padding()
-                    .background(.black)
-                    .cornerRadius(50)
+                .padding()
+                .background(.black)
+                .cornerRadius(50)
             }
         }
-       
+        
     }
     func addSamples() {
         let mean = Offenses(name:"Shes mean")
