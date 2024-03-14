@@ -15,6 +15,7 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @State var isCopShowing = false
     @ObservedObject var sounds = SoundManager()
+    @State var randomDouble = 0.0
     var body: some View {
         if isCopShowing {
             Confirmation()
@@ -23,15 +24,23 @@ struct ContentView: View {
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
                         withAnimation(.easeOut(duration: 2)) {
                             self.isCopShowing.toggle()
+                            randomDouble = Double.random(in: 0...360)
                         }
                     })
                 }
         } else {
             ZStack {
-                Image(.kingSloth)
+                Color.black
+                    .ignoresSafeArea()
+                Image(.burningCty)
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
+                Image(.loneSloth)
+                    .resizable()
+                    .scaledToFit()
+                    .rotationEffect(.degrees(randomDouble))
+                
                 VStack {
                     List {
                         ForEach(offense) { off in

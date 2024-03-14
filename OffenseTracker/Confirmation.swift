@@ -20,31 +20,31 @@ struct Confirmation: View {
                 .ignoresSafeArea()
             VStack() {
                 VortexView(.fire) {
-                        RoundedRectangle(cornerRadius: 250)
-                            .fill(.red)
-                            .blendMode(.plusLighter)
-                            .frame(height: 200)
-                            .tag("circle")
-                            .containerRelativeFrame(.vertical)
-                    }
-            }
-                VStack{
-                    Text("SLOTH COP SEES ALL")
-                        .foregroundStyle(linear)
-                        .font(.largeTitle)
-                        .bold()
-                    Image(.newCop)
-                        .resizable()
-                        .scaledToFit()
-                    Text("The offense has been noted Thank you for your unyielding loyalty")
-                        .font(.title)
-                        .foregroundStyle(linear2)
-                        .bold()
-                        .multilineTextAlignment(.center)
+                    RoundedRectangle(cornerRadius: 250)
+                        .fill(.red)
+                        .blendMode(.plusLighter)
+                        .frame(height: 200)
+                        .tag("circle")
+                        .containerRelativeFrame(.vertical)
                 }
+            }
+            VStack{
+                Text("SLOTH COP SEES ALL")
+                    .foregroundStyle(linear)
+                    .font(.largeTitle)
+                    .bold()
+                Image(.newCop)
+                    .resizable()
+                    .scaledToFit()
+                Text("The offense has been noted Thank you for your unyielding loyalty")
+                    .font(.title)
+                    .foregroundStyle(linear2)
+                    .bold()
+                    .multilineTextAlignment(.center)
             }
         }
     }
+}
 
 #Preview {
     Confirmation()
