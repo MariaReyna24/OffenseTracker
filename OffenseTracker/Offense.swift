@@ -7,11 +7,12 @@
 
 import Foundation
 import SwiftData
+import CloudKit
 
 @Model
 class Offenses {
-    @Attribute(.unique) var name: String
-    @Attribute(.unique) var date: Date
+    var name: String?
+    var date: Date?
     init(name: String = "", date: Date = Date.now) {
         self.name = name
         self.date = date
