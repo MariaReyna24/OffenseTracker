@@ -11,15 +11,14 @@ import AVFoundation
 import CloudKit
 
 struct ContentView: View {
-    @Query var offense: [Offenses]
     @State var showingSheet = false
-    @Environment(\.modelContext) var modelContext
     @State var isCopShowing = false
     @ObservedObject var sounds = SoundManager()
     @State var randomDouble = 180.0
     @State var randomPosition = CGPoint(x: 200, y: 400)
-    @State var hideButton = false
+    @Environment(\.managedObjectContext) private var viewContext
     @State private var bounce = false
+    @FetchRequest(sortDescriptors: []) private var offs: FetchedResults<Offense>
     var body: some View {
         if isCopShowing {
             Confirmation()
@@ -55,11 +54,11 @@ struct ContentView: View {
                     }
                 VStack {
                     List {
-                        ForEach(offense) { off in
+                        ForEach(offs) { off in
                             Text("\(off.name ?? "Ex") on  \(off.date?.formatted(date: .long, time: .shortened) ?? "ex date"))")
                                 .foregroundStyle(.black)
                                 .listRowBackground(Color.white.opacity(0.8))
-                        } .onDelete(perform: delteOffense)
+                        } //.onDelete(perform: delteOffense)
                     }
                     .padding()
                     .scrollContentBackground(.hidden)
@@ -75,7 +74,7 @@ struct ContentView: View {
                     .padding()
                     .tint(.black)
                     .sheet(isPresented: $showingSheet){
-                        sheetVIew(off: Offenses(), isCopShowing: $isCopShowing)
+                        sheetVIew(isCopShowing: $isCopShowing)
                             .presentationDetents([.fraction(0.20)])
                             .presentationDragIndicator(.visible)
                     }
@@ -84,22 +83,6 @@ struct ContentView: View {
             
         }
     }
-    func delteOffense(_ indexSet: IndexSet){
-        for index in indexSet {
-            let offense = offense[index]
-            modelContext.delete(offense)
-        }
-    }
 }
 
-#Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Offenses.self, configurations: config)
-        //let example = Offenses(name: "Example Offense")
-        return ContentView()
-            .modelContainer(container)
-    } catch {
-        fatalError("Failed to create a model container")
-    }
-}
+

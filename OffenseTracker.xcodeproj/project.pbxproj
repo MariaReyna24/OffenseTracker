@@ -20,6 +20,8 @@
 		A29186802BA090DB007B8206 /* Vortex in Frameworks */ = {isa = PBXBuildFile; productRef = A291867F2BA090DB007B8206 /* Vortex */; };
 		A29186BA2BA0AF60007B8206 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29186B92BA0AF60007B8206 /* SoundManager.swift */; };
 		A29186BC2BA0C983007B8206 /* sus.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A29186BB2BA0C983007B8206 /* sus.mp3 */; };
+		A2D7F7052BA877E300634C33 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A2D7F7032BA877E300634C33 /* Model.xcdatamodeld */; };
+		A2D7F7072BA8857900634C33 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D7F7062BA8857900634C33 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		A29186B92BA0AF60007B8206 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		A29186BB2BA0C983007B8206 /* sus.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sus.mp3; sourceTree = "<group>"; };
 		A293E1A92BA22472001F2462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A2D7F7042BA877E300634C33 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		A2D7F7062BA8857900634C33 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 		A275898E2B7AD6AF00B39EC1 = {
 			isa = PBXGroup;
 			children = (
+				A2D7F7032BA877E300634C33 /* Model.xcdatamodeld */,
 				A27589992B7AD6AF00B39EC1 /* OffenseTracker */,
 				A27589AA2B7AD6B000B39EC1 /* OffenseTrackerTests */,
 				A27589B42B7AD6B000B39EC1 /* OffenseTrackerUITests */,
@@ -113,6 +118,7 @@
 				A29186BB2BA0C983007B8206 /* sus.mp3 */,
 				A275899A2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift */,
 				A275899C2B7AD6AF00B39EC1 /* ContentView.swift */,
+				A2D7F7062BA8857900634C33 /* CoreDataStack.swift */,
 				A29186B92BA0AF60007B8206 /* SoundManager.swift */,
 				A27589C62B7ADB6800B39EC1 /* sheetVIew.swift */,
 				A291860D2B9F3A60007B8206 /* Confirmation.swift */,
@@ -288,9 +294,11 @@
 				A27589C52B7AD85600B39EC1 /* Offense.swift in Sources */,
 				A275899D2B7AD6AF00B39EC1 /* ContentView.swift in Sources */,
 				A291860E2B9F3A60007B8206 /* Confirmation.swift in Sources */,
+				A2D7F7052BA877E300634C33 /* Model.xcdatamodeld in Sources */,
 				A27589C72B7ADB6800B39EC1 /* sheetVIew.swift in Sources */,
 				A275899B2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift in Sources */,
 				A29186BA2BA0AF60007B8206 /* SoundManager.swift in Sources */,
+				A2D7F7072BA8857900634C33 /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,6 +659,20 @@
 			productName = Vortex;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		A2D7F7032BA877E300634C33 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A2D7F7042BA877E300634C33 /* Model.xcdatamodel */,
+			);
+			currentVersion = A2D7F7042BA877E300634C33 /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = "/Users/mariareyna/Desktop/Hybrid Mentor Work/OffenseTracker/Model.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A275898F2B7AD6AF00B39EC1 /* Project object */;
 }

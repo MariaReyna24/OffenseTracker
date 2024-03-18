@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
-import SwiftData
 import CloudKit
+import CoreData
 @main
 struct OffenseTrackerApp: App {
+    @Environment(\.scenePhase) var scenePhase
+    let persistenceController = CoreDataStack.shared
     var body: some Scene {
         WindowGroup {
             ContentView()
-        }.modelContainer(for: Offenses.self)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+        }
     }
 }
