@@ -14,7 +14,7 @@ class Offenses: ObservableObject {
     @Published var name: String
     @Published var date: Date
    
-    init(name: String = "", date: Date) {
+    init(name: String = "", date: Date = Date.now) {
         self.name = name
         self.date = date
     }

@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 import AVFoundation
 import CloudKit
-
+import CoreData
 struct ContentView: View {
     @State var showingSheet = false
     @State var isCopShowing = false
@@ -19,6 +19,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State private var bounce = false
     @FetchRequest(sortDescriptors: []) private var offs: FetchedResults<Offense>
+    
     var body: some View {
         if isCopShowing {
             Confirmation()
@@ -55,14 +56,16 @@ struct ContentView: View {
                 VStack {
                     List {
                         ForEach(offs) { off in
-                            Text("\(off.name ?? "Ex") on  \(off.date?.formatted(date: .long, time: .shortened) ?? "ex date"))")
+                            Text("\(off.name ?? "Ex") on  \(off.date?.formatted(date: .long, time: .shortened) ?? "Example date")")
                                 .foregroundStyle(.black)
                                 .listRowBackground(Color.white.opacity(0.8))
-                        } //.onDelete(perform: delteOffense)
+                           
+                        } .onDelete(perform: removeObj)
+                        
                     }
                     .padding()
                     .scrollContentBackground(.hidden)
-                    
+                   
                     
                     Button("Add offense") {
                         showingSheet.toggle()
@@ -81,6 +84,12 @@ struct ContentView: View {
                 }
             }
             
+        }
+    }
+    func removeObj(at offsets: IndexSet) {
+        for index in offsets {
+            let obj = offs[index]
+            viewContext.delete(obj)
         }
     }
 }

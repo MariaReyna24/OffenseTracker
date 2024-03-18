@@ -44,4 +44,8 @@ struct CoreDataStack {
             }
         }
     }
+    func delete(off: Offense) {
+        let context = container.viewContext
+        context.delete(off)
+    }
 }

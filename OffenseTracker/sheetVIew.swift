@@ -47,6 +47,8 @@ struct sheetVIew: View {
     func addOff() {
        let newTask = Offense(context: viewContext)
         newTask.name = newOffense
+        newTask.date = Date.now
+        
         try? viewContext.save()
     }
 }
