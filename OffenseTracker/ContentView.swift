@@ -16,10 +16,10 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @State var isCopShowing = false
     @ObservedObject var sounds = SoundManager()
-    @State var randomDouble = 0.0
+    @State var randomDouble = 180.0
     @State var randomPosition = CGPoint(x: 200, y: 400)
     @State var hideButton = false
-    @State var bouncing = true
+    @State private var bounce = false
     var body: some View {
         if isCopShowing {
             Confirmation()
@@ -46,18 +46,24 @@ struct ContentView: View {
                     .scaledToFit()
                     .rotationEffect(.degrees(randomDouble))
                     .position(randomPosition)
-                    .onAppear{
-                        withAnimation(.bouncy(duration: .infinity)){}
+                // I stole this code from alex
+                    .offset(y: bounce ? -20 :150)
+                    .onAppear() {
+                        withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
+                            bounce.toggle()
+                        }
                     }
                 VStack {
                     List {
                         ForEach(offense) { off in
                             Text("\(off.name ?? "Ex") on  \(off.date?.formatted(date: .long, time: .shortened) ?? "ex date"))")
+                                .foregroundStyle(.black)
+                                .listRowBackground(Color.white.opacity(0.8))
                         } .onDelete(perform: delteOffense)
                     }
                     .padding()
                     .scrollContentBackground(.hidden)
-                    //.listRowBackground(Color.white.opacity(0.1))
+                    
                     
                     Button("Add offense") {
                         showingSheet.toggle()
