@@ -8,6 +8,7 @@
 import SwiftUI
 import CloudKit
 import CoreData
+
 @main
 struct OffenseTrackerApp: App {
     @Environment(\.scenePhase) var scenePhase

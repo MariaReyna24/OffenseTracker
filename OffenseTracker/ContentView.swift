@@ -92,6 +92,7 @@ struct ContentView: View {
             viewContext.delete(obj)
         }
     }
+    
 }
 
 

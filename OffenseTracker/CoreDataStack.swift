@@ -7,11 +7,18 @@
 
 import Foundation
 import CoreData
+import CloudKit
 
 struct CoreDataStack {
     static let shared = CoreDataStack()
     
-    let container: NSPersistentContainer
+    let container: NSPersistentCloudKitContainer
+    
+    let cloudStoreDescription = NSPersistentStoreDescription(url: cloudStoreLocation)
+    
+    cloudStoreDescription.configuration = "Cloud"
+      
+    cloudStoreDescription.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "your.containerID")
     
     static var preview: CoreDataStack = {
         let controller = CoreDataStack(inMemory: true)
@@ -22,7 +29,7 @@ struct CoreDataStack {
         return controller
     }()
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Model")
+        container = NSPersistentCloudKitContainer(name: "Model")
         
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
@@ -40,7 +47,7 @@ struct CoreDataStack {
             do {
                 try context.save()
             } catch {
-                // Show some error here
+                print("items did not save: \(error.localizedDescription)")
             }
         }
     }
