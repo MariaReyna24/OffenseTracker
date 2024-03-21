@@ -13,6 +13,7 @@ class SoundManager: ObservableObject {
     enum Sounds: String, CaseIterable {
         case sus
         case angels
+        case bam
     }
     
     func playSound(sound: Sounds) {

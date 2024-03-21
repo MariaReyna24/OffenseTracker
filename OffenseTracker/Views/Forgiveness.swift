@@ -7,14 +7,22 @@
 
 import SwiftUI
 import Vortex
+
+
+enum phases: CaseIterable {
+    case up, down
+    var move: any Transition {
+        switch self {
+        case .up: MoveTransition(edge: .top)
+        case .down: MoveTransition(edge: .bottom)
+        }
+    }
+}
+
 struct Forgiveness: View {
-  //  var linear = LinearGradient(colors: [.green], startPoint: .top, endPoint: .bottom)
-    var controlPoint = 0.0
+    @State var bounce = false
     var body: some View {
         ZStack {
-//            Color.white
-//                .opacity(0.2)
-//                .ignoresSafeArea()
             Image(.godsHome)
                 .resizable()
                 .ignoresSafeArea()
@@ -31,11 +39,22 @@ struct Forgiveness: View {
                 Image(.slothA)
                     .resizable()
                     .scaledToFit()
+                    .offset(y: bounce ? -20 :400)
+                    .onAppear() {
+                        withAnimation(Animation.easeInOut(duration: 3).repeatForever(autoreverses: true)) {
+                            bounce.toggle()
+                        }
+                    }
+                    .phaseAnimator(phases.allCases) { content, phase in
+                        content
+                            .transition(.move(edge: .top))
+                    }
                 Text("The Sloth gods thank you for your forgivness")
                     .font(.largeTitle)
                     .foregroundStyle(.black)
                     .bold()
                     .multilineTextAlignment(.center)
+                    .transition(.move(edge: .bottom))
             }
         }
     }

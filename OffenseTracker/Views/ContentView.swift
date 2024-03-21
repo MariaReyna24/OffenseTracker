@@ -11,24 +11,23 @@ import AVFoundation
 import CloudKit
 
 struct ContentView: View {
-    @Query var offense: [Offenses]
-    @State var showingSheet = false
-    @Environment(\.modelContext) var modelContext
-    @State var isCopShowing = false
     @ObservedObject var sounds = SoundManager()
+    @Environment(\.modelContext) var modelContext
+    @State var deletedIndex: IndexSet?
+    @Query var offense: [Offenses]
     @State var randomDouble = 180.0
     @State var randomPosition = CGPoint(x: 200, y: 400)
-    @State var hideButton = false
+    @State private var showingSheet = false
+    @State private var isCopShowing = false
     @State private var bounce = false
-    @State var isAlertShowing = false
-    @State var deletedIndex: IndexSet?
-    @State var forgive = false
-    @State var isConfirmationAlertShowing = false
-    @State var ifYouSaySo = false
+    @State private var isAlertShowing = false
+    @State private var forgive = false
+    @State private var ifYouSaySo = false
+    @State private var isShowingDog = false
     var body: some View {
         if isCopShowing {
             Confirmation()
-                .onAppear{
+                .onAppear {
                     sounds.playSound(sound: .sus)
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
                         withAnimation(.easeOut(duration: 3)) {
@@ -43,8 +42,8 @@ struct ContentView: View {
                 .transition(.move(edge: .top).combined(with: .push(from: .bottom)))
                 .onAppear {
                     sounds.playSound(sound: .angels)
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
-                        withAnimation(.easeIn(duration: 1)){
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                        withAnimation(.easeIn(duration: 2)){
                             self.forgive.toggle()
                         }
                     })
@@ -80,14 +79,8 @@ struct ContentView: View {
                             isAlertShowing.toggle()
                         }.alert("Are you sure you want to forgive Kiana?", isPresented: $isAlertShowing) {
                             Button("Yes", role: .destructive) {
-                                isConfirmationAlertShowing.toggle()
+                                isShowingDog.toggle()
                             }
-                        }
-                        .alert("Really???" , isPresented: $isConfirmationAlertShowing) {
-                            Button("Of Course", role: .destructive){
-                                ifYouSaySo.toggle()
-                            }
-                            
                         }
                         .alert("Ok if you say so 😬" , isPresented: $ifYouSaySo) {
                             Button("Forgive", role: .destructive){
@@ -95,7 +88,6 @@ struct ContentView: View {
                                 forgive.toggle()
                             }
                         }
-                                        
                     }
                     .padding()
                     .scrollContentBackground(.hidden)
@@ -114,9 +106,20 @@ struct ContentView: View {
                             .presentationDetents([.fraction(0.20)])
                             .presentationDragIndicator(.visible)
                     }
+                }.overlay{
+                    if isShowingDog {
+                        SusDog()
+                            .frame(width: 200,height: 150)
+                            .onAppear{
+                                sounds.playSound(sound: .bam)
+                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                                    isShowingDog.toggle()
+                                    ifYouSaySo.toggle()
+                                })
+                            }
+                    }
                 }
             }
-            
         }
     }
     func delteOffense(_ indexSet: IndexSet){

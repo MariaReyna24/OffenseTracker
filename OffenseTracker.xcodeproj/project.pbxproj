@@ -22,6 +22,8 @@
 		A29186BC2BA0C983007B8206 /* sus.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A29186BB2BA0C983007B8206 /* sus.mp3 */; };
 		A2D7F73F2BA9E07F00634C33 /* Forgiveness.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D7F73E2BA9E07F00634C33 /* Forgiveness.swift */; };
 		A2D7F7452BAA26CB00634C33 /* angels.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2D7F7442BAA26CB00634C33 /* angels.mp3 */; };
+		A2D7F7472BAB306900634C33 /* SusDog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D7F7462BAB306900634C33 /* SusDog.swift */; };
+		A2D7F74C2BAB351800634C33 /* bam.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2D7F74B2BAB351800634C33 /* bam.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		A293E1A92BA22472001F2462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A2D7F73E2BA9E07F00634C33 /* Forgiveness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forgiveness.swift; sourceTree = "<group>"; };
 		A2D7F7442BAA26CB00634C33 /* angels.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = angels.mp3; sourceTree = "<group>"; };
+		A2D7F7462BAB306900634C33 /* SusDog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SusDog.swift; sourceTree = "<group>"; };
+		A2D7F74B2BAB351800634C33 /* bam.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bam.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,15 +118,10 @@
 			children = (
 				A293E1A92BA22472001F2462 /* Info.plist */,
 				A222DE732B893E4400575D66 /* OffenseTracker.entitlements */,
-				A29186BB2BA0C983007B8206 /* sus.mp3 */,
-				A2D7F7442BAA26CB00634C33 /* angels.mp3 */,
+				A2D7F74A2BAB333E00634C33 /* Sounds */,
 				A275899A2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift */,
-				A275899C2B7AD6AF00B39EC1 /* ContentView.swift */,
-				A2D7F73E2BA9E07F00634C33 /* Forgiveness.swift */,
-				A29186B92BA0AF60007B8206 /* SoundManager.swift */,
-				A27589C62B7ADB6800B39EC1 /* sheetVIew.swift */,
-				A291860D2B9F3A60007B8206 /* Confirmation.swift */,
-				A27589C42B7AD85600B39EC1 /* Offense.swift */,
+				A2D7F7492BAB333100634C33 /* Views */,
+				A2D7F7482BAB330B00634C33 /* Model */,
 				A275899E2B7AD6B000B39EC1 /* Assets.xcassets */,
 				A27589A02B7AD6B000B39EC1 /* Preview Content */,
 			);
@@ -152,6 +151,37 @@
 				A27589B72B7AD6B000B39EC1 /* OffenseTrackerUITestsLaunchTests.swift */,
 			);
 			path = OffenseTrackerUITests;
+			sourceTree = "<group>";
+		};
+		A2D7F7482BAB330B00634C33 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A29186B92BA0AF60007B8206 /* SoundManager.swift */,
+				A27589C42B7AD85600B39EC1 /* Offense.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A2D7F7492BAB333100634C33 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A275899C2B7AD6AF00B39EC1 /* ContentView.swift */,
+				A2D7F7462BAB306900634C33 /* SusDog.swift */,
+				A2D7F73E2BA9E07F00634C33 /* Forgiveness.swift */,
+				A27589C62B7ADB6800B39EC1 /* sheetVIew.swift */,
+				A291860D2B9F3A60007B8206 /* Confirmation.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A2D7F74A2BAB333E00634C33 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				A29186BB2BA0C983007B8206 /* sus.mp3 */,
+				A2D7F7442BAA26CB00634C33 /* angels.mp3 */,
+				A2D7F74B2BAB351800634C33 /* bam.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +298,7 @@
 				A27589A22B7AD6B000B39EC1 /* Preview Assets.xcassets in Resources */,
 				A2D7F7452BAA26CB00634C33 /* angels.mp3 in Resources */,
 				A275899F2B7AD6B000B39EC1 /* Assets.xcassets in Resources */,
+				A2D7F74C2BAB351800634C33 /* bam.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +327,7 @@
 				A275899D2B7AD6AF00B39EC1 /* ContentView.swift in Sources */,
 				A291860E2B9F3A60007B8206 /* Confirmation.swift in Sources */,
 				A27589C72B7ADB6800B39EC1 /* sheetVIew.swift in Sources */,
+				A2D7F7472BAB306900634C33 /* SusDog.swift in Sources */,
 				A275899B2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift in Sources */,
 				A29186BA2BA0AF60007B8206 /* SoundManager.swift in Sources */,
 				A2D7F73F2BA9E07F00634C33 /* Forgiveness.swift in Sources */,
@@ -461,17 +493,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OffenseTracker/OffenseTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"OffenseTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 895F6NWJ4A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OffenseTracker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KOT;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -496,17 +529,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OffenseTracker/OffenseTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"OffenseTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 895F6NWJ4A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OffenseTracker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KOT;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
