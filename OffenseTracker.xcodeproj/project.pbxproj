@@ -24,6 +24,7 @@
 		A2D7F7452BAA26CB00634C33 /* angels.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2D7F7442BAA26CB00634C33 /* angels.mp3 */; };
 		A2D7F7472BAB306900634C33 /* SusDog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D7F7462BAB306900634C33 /* SusDog.swift */; };
 		A2D7F74C2BAB351800634C33 /* bam.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2D7F74B2BAB351800634C33 /* bam.mp3 */; };
+		A2D7F74E2BAC78A900634C33 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D7F74D2BAC78A900634C33 /* Haptics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		A2D7F7442BAA26CB00634C33 /* angels.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = angels.mp3; sourceTree = "<group>"; };
 		A2D7F7462BAB306900634C33 /* SusDog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SusDog.swift; sourceTree = "<group>"; };
 		A2D7F74B2BAB351800634C33 /* bam.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bam.mp3; sourceTree = "<group>"; };
+		A2D7F74D2BAC78A900634C33 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 		A2D7F7482BAB330B00634C33 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A2D7F74D2BAC78A900634C33 /* Haptics.swift */,
 				A29186B92BA0AF60007B8206 /* SoundManager.swift */,
 				A27589C42B7AD85600B39EC1 /* Offense.swift */,
 			);
@@ -323,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2D7F74E2BAC78A900634C33 /* Haptics.swift in Sources */,
 				A27589C52B7AD85600B39EC1 /* Offense.swift in Sources */,
 				A275899D2B7AD6AF00B39EC1 /* ContentView.swift in Sources */,
 				A291860E2B9F3A60007B8206 /* Confirmation.swift in Sources */,
@@ -493,7 +497,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OffenseTracker/OffenseTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"OffenseTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 895F6NWJ4A;
 				ENABLE_PREVIEWS = YES;
@@ -529,7 +533,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OffenseTracker/OffenseTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"OffenseTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 895F6NWJ4A;
 				ENABLE_PREVIEWS = YES;

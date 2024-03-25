@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 import AVFoundation
 import CloudKit
+import CoreHaptics
 
 struct ContentView: View {
     @ObservedObject var sounds = SoundManager()
@@ -29,6 +30,7 @@ struct ContentView: View {
             Confirmation()
                 .onAppear {
                     sounds.playSound(sound: .sus)
+                    //heavyHaptic()
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
                         withAnimation(.easeOut(duration: 3)) {
                             self.isCopShowing.toggle()
@@ -71,7 +73,7 @@ struct ContentView: View {
                 VStack {
                     List {
                         ForEach(offense) { off in
-                            Text("\(off.name ?? "Ex") on  \(off.date?.formatted(date: .long, time: .shortened) ?? "ex date")")
+                            Text("\(off.name ?? "Ex") on \(off.date?.formatted(date: .long, time: .shortened) ?? "ex date")")
                                 .foregroundStyle(.black)
                                 .listRowBackground(Color.white.opacity(0.8))
                         } .onDelete { index in
