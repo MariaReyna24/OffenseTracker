@@ -9,16 +9,10 @@ import Foundation
 import CoreData
 import CloudKit
 
-struct CoreDataStack {
+class CoreDataStack: ObservableObject {
     static let shared = CoreDataStack()
     
     let container: NSPersistentCloudKitContainer
-    
-    let cloudStoreDescription = NSPersistentStoreDescription(url: cloudStoreLocation)
-    
-    cloudStoreDescription.configuration = "Cloud"
-      
-    cloudStoreDescription.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "your.containerID")
     
     static var preview: CoreDataStack = {
         let controller = CoreDataStack(inMemory: true)

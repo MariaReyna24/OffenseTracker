@@ -11,6 +11,7 @@ import CloudKit
 import CoreData
 
 struct sheetVIew: View {
+    @ObservedObject var core = CoreDataStack()
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) var dismiss
     @State var newOffense = ""
@@ -27,6 +28,7 @@ struct sheetVIew: View {
                     .padding()
                 Button(action: {
                    addOff()
+                    core.save()
                     dismiss()
                     withAnimation(.easeInOut(duration: 2)) {
                         isCopShowing.toggle()
