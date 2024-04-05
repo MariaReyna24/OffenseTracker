@@ -11,7 +11,6 @@ import CloudKit
 import CoreData
 
 struct sheetVIew: View {
-    @ObservedObject var core = CoreDataStack()
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) var dismiss
     @State var newOffense = ""
@@ -28,7 +27,7 @@ struct sheetVIew: View {
                     .padding()
                 Button(action: {
                    addOff()
-                    core.save()
+                    save()
                     dismiss()
                     withAnimation(.easeInOut(duration: 2)) {
                         isCopShowing.toggle()
@@ -46,6 +45,18 @@ struct sheetVIew: View {
         }
         
     }
+    func save() {
+        let context = viewContext
+
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                print("items did not save: \(error.localizedDescription)")
+            }
+        }
+    }
+
     func addOff() {
        let newTask = Offense(context: viewContext)
         newTask.name = newOffense

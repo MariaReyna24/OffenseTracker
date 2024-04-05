@@ -12,41 +12,39 @@ import CloudKit
 class CoreDataStack: ObservableObject {
     static let shared = CoreDataStack()
     
-    let container: NSPersistentCloudKitContainer
-    
+     var persistentContainer: NSPersistentCloudKitContainer = {
+      
+          let container = NSPersistentCloudKitContainer(name: "Model")
+          container.loadPersistentStores(completionHandler: {
+              (storeDescription, error) in
+              if let error = error as NSError? {
+                  fatalError("Unresolved error \(error), \(error.userInfo)")
+              }
+          })
+        
+          return container
+      }()
+    //var container = CKDatabase.
+    var publicDatabase = container.publicCloudDatabase
     static var preview: CoreDataStack = {
         let controller = CoreDataStack(inMemory: true)
         
         for _ in 0..<10 {
-            let offense = Offense(context: controller.container.viewContext)
+            let offense = Offense(context: controller.persistentContainer.viewContext)
         }
         return controller
     }()
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "Model")
+        persistentContainer = NSPersistentCloudKitContainer(name: "Model")
         
         if inMemory {
-            container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
+            persistentContainer.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         }
-        container.loadPersistentStores { description, error in
+        persistentContainer.loadPersistentStores { description, error in
             if let error = error {
                 fatalError("Error: \(error.localizedDescription)")
             }
         }
     }
-    func save() {
-        let context = container.viewContext
-
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                print("items did not save: \(error.localizedDescription)")
-            }
-        }
-    }
-    func delete(off: Offense) {
-        let context = container.viewContext
-        context.delete(off)
-    }
+   
 }

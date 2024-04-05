@@ -12,11 +12,11 @@ import CoreData
 @main
 struct OffenseTrackerApp: App {
     @Environment(\.scenePhase) var scenePhase
-    let persistenceController = CoreDataStack.shared
+    var persistenceController = CoreDataStack.shared
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, persistenceController.persistentContainer.viewContext)
         }
     }
 }
