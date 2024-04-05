@@ -12,6 +12,9 @@ import CloudKit
 struct sheetVIew: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
+    /*
+     @Bindable allows us to get bindings from the offenses model
+     */
     @Bindable var off: Offenses
     @State var newOffense = ""
     @Binding var isCopShowing: Bool

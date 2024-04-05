@@ -13,8 +13,16 @@ import CoreHaptics
 
 struct ContentView: View {
     @ObservedObject var sounds = SoundManager()
+    // @Enviroment will access the model container to add the opjects to SwiftData
     @Environment(\.modelContext) var modelContext
     @State var deletedIndex: IndexSet?
+    /*
+     - All swift data models automatically confirm to the Identifiable protocol
+     
+     @Query will load all the data we set to it when the view appears
+     but it will also watch the data base for changes so that
+     whenever any data chanages the property will update
+    */
     @Query var offense: [Offenses]
     @State var randomDouble = 180.0
     @State var randomPosition = CGPoint(x: 200, y: 400)
@@ -131,12 +139,15 @@ struct ContentView: View {
         }
     }
 }
-
+// in order to preview the simulator you need to create a model container by hand because swift data doesnt know where to store the preview Data.
 #Preview {
     do {
+        // Makes a Configs the model to be stored inMemory
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        //creates that container we are using for this preview
         let container = try ModelContainer(for: Offenses.self, configurations: config)
-        //let example = Offenses(name: "Example Offense")
+        // this is an example to fill in the code but we dont need it cuz our content view doesnt take an ex data it only displays that data.
+        let example = Offenses(name: "Example Offense")
         return ContentView()
             .modelContainer(container)
     } catch {

@@ -13,6 +13,7 @@ struct OffenseTrackerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            //The modelContainer creates a Container for your data that stores that data and persists it
         }.modelContainer(for: Offenses.self)
     }
 }
