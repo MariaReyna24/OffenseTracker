@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 import CloudKit
+
 // Model makes this class Observable and a data Model
 @Model
 class Offenses {
@@ -20,5 +21,4 @@ class Offenses {
         self.name = name
         self.date = date
     }
-
 }

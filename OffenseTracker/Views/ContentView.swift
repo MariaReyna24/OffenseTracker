@@ -15,7 +15,6 @@ struct ContentView: View {
     @ObservedObject var sounds = SoundManager()
     // @Enviroment will access the model container to add the opjects to SwiftData
     @Environment(\.modelContext) var modelContext
-    @State var deletedIndex: IndexSet?
     /*
      - All swift data models automatically confirm to the Identifiable protocol
      
@@ -24,6 +23,7 @@ struct ContentView: View {
      whenever any data chanages the property will update
     */
     @Query var offense: [Offenses]
+    @State var deletedIndex: IndexSet?
     @State var randomDouble = 180.0
     @State var randomPosition = CGPoint(x: 200, y: 400)
     @State private var showingSheet = false
