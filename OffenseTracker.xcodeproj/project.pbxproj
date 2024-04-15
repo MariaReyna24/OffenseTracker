@@ -16,6 +16,7 @@
 		A27589B82B7AD6B000B39EC1 /* OffenseTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27589B72B7AD6B000B39EC1 /* OffenseTrackerUITestsLaunchTests.swift */; };
 		A27589C52B7AD85600B39EC1 /* Offense.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27589C42B7AD85600B39EC1 /* Offense.swift */; };
 		A27589C72B7ADB6800B39EC1 /* sheetVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27589C62B7ADB6800B39EC1 /* sheetVIew.swift */; };
+		A2851B282BCD6DA10060E5C4 /* CloudKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2851B272BCD6DA10060E5C4 /* CloudKitService.swift */; };
 		A291860E2B9F3A60007B8206 /* Confirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A291860D2B9F3A60007B8206 /* Confirmation.swift */; };
 		A29186802BA090DB007B8206 /* Vortex in Frameworks */ = {isa = PBXBuildFile; productRef = A291867F2BA090DB007B8206 /* Vortex */; };
 		A29186BA2BA0AF60007B8206 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29186B92BA0AF60007B8206 /* SoundManager.swift */; };
@@ -58,6 +59,7 @@
 		A27589B72B7AD6B000B39EC1 /* OffenseTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffenseTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A27589C42B7AD85600B39EC1 /* Offense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offense.swift; sourceTree = "<group>"; };
 		A27589C62B7ADB6800B39EC1 /* sheetVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sheetVIew.swift; sourceTree = "<group>"; };
+		A2851B272BCD6DA10060E5C4 /* CloudKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitService.swift; sourceTree = "<group>"; };
 		A291860D2B9F3A60007B8206 /* Confirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confirmation.swift; sourceTree = "<group>"; };
 		A29186B92BA0AF60007B8206 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		A29186BB2BA0C983007B8206 /* sus.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sus.mp3; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				A2D7F74D2BAC78A900634C33 /* Haptics.swift */,
 				A29186B92BA0AF60007B8206 /* SoundManager.swift */,
 				A27589C42B7AD85600B39EC1 /* Offense.swift */,
+				A2851B272BCD6DA10060E5C4 /* CloudKitService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				A2D7F7472BAB306900634C33 /* SusDog.swift in Sources */,
 				A275899B2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift in Sources */,
 				A29186BA2BA0AF60007B8206 /* SoundManager.swift in Sources */,
+				A2851B282BCD6DA10060E5C4 /* CloudKitService.swift in Sources */,
 				A2D7F73F2BA9E07F00634C33 /* Forgiveness.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

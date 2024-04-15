@@ -147,7 +147,7 @@ struct ContentView: View {
         //creates that container we are using for this preview
         let container = try ModelContainer(for: Offenses.self, configurations: config)
         // this is an example to fill in the code but we dont need it cuz our content view doesnt take an ex data it only displays that data.
-        let example = Offenses(name: "Example Offense")
+       // let example = Offenses(name: "Example Offense")
         return ContentView()
             .modelContainer(container)
     } catch {
