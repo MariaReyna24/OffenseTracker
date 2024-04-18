@@ -11,9 +11,10 @@ import CloudKit
 import CoreData
 
 struct sheetVIew: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject var offVm: Offenses
     @Environment(\.dismiss) var dismiss
     @State var newOffense = ""
+    @State private var isShowingError = false
     @Binding var isCopShowing: Bool
     var body: some View {
         ZStack{
@@ -26,8 +27,7 @@ struct sheetVIew: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 Button(action: {
-                   addOff()
-                    save()
+                    addOff()
                     dismiss()
                     withAnimation(.easeInOut(duration: 2)) {
                         isCopShowing.toggle()
@@ -43,27 +43,18 @@ struct sheetVIew: View {
                 .cornerRadius(50)
             }
         }
-        
     }
-    func save() {
-        let context = viewContext
-
-        if context.hasChanges {
+    func addOff(){
+        Task {
             do {
-                try context.save()
+                try await offVm.saveNewEvent(withName: newOffense, date: Date.now)
+                dismiss()
             } catch {
-                print("items did not save: \(error.localizedDescription)")
+                isShowingError = true
             }
         }
     }
 
-    func addOff() {
-       let newTask = Offense(context: viewContext)
-        newTask.name = newOffense
-        newTask.date = Date.now
-        
-        try? viewContext.save()
-    }
 }
 
 //#Preview {
