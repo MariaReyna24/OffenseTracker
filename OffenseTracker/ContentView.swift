@@ -10,6 +10,7 @@ import SwiftData
 import AVFoundation
 import CloudKit
 import CoreData
+
 struct ContentView: View {
     @State var deletedIndex: IndexSet?
     @State private var forgive = false
@@ -21,7 +22,6 @@ struct ContentView: View {
     @State var randomPosition = CGPoint(x: 200, y: 400)
     @Environment(\.managedObjectContext) private var viewContext
     @State private var bounce = false
-    //    @FetchRequest(sortDescriptors: []) private var offs: FetchedResults<Offense>
     @StateObject var offVM = Offenses()
     @State private var ifYouSaySo = false
     @State private var isShowingDog = false
@@ -30,8 +30,8 @@ struct ContentView: View {
             Confirmation()
                 .onAppear {
                     sounds.playSound(sound: .sus)
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
-                        withAnimation(.easeOut(duration: 3)) {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4, execute: {
+                        withAnimation(.easeOut(duration: 4)) {
                             self.isCopShowing.toggle()
                             randomDouble = Double.random(in: 0...360)
                             randomPosition = CGPoint(x: Double.random(in: 100...300), y: Double.random(in: 200...500))
@@ -50,59 +50,61 @@ struct ContentView: View {
                     })
                 }
         } else {
-            List {
-                switch offVM.appState {
-                case .loading:
-                    VStack {
-                        ProgressView()
-                        Text("Loading events...")
-                            .font(.caption)
-                    }.listRowBackground(EmptyView())
-                case .loaded:
-                    ZStack {
-                        Color.black
-                            .ignoresSafeArea()
-                        Image(.burningCty)
-                            .resizable()
-                            .scaledToFill()
-                            .ignoresSafeArea()
-                        Image(.loneSloth)
-                            .resizable()
-                            .scaledToFit()
-                            .rotationEffect(.degrees(randomDouble))
-                            .position(randomPosition)
-                        // I stole this code from alex
-                            .offset(y: bounce ? -20 :150)
-                            .onAppear() {
-                                withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
-                                    bounce.toggle()
-                                }
-                            }
-                        
-                        
-                        VStack {
-                            List {
-                                ForEach(offVM.listOfOffenses) { off in
-                                    Text("\(off.name) on: \(off.date.formatted())")
-                                } .onDelete { index in
-                                    deletedIndex = index
-                                    isAlertShowing.toggle()
-                                }.alert("Are you sure you want to forgive Kiana?", isPresented: $isAlertShowing) {
-                                    Button("Yes", role: .destructive) {
-                                        isShowingDog.toggle()
-                                    }
-                                }
-                                .alert("Ok if you say so 😬" , isPresented: $ifYouSaySo) {
-                                    Button("Forgive", role: .destructive){
-                                        //removeObj(at: deletedIndex ?? IndexSet(integer: Int(0)))
-                                        forgive.toggle()
-                                    }
-                                }
+            switch offVM.appState {
+            case .loading:
+                VStack {
+                    ProgressView()
+                    Text("Loading events...")
+                        .font(.caption)
+                }
+                .task {
+                    try? await offVM.fetchOffenses()
+                }
+            case .loaded:
+                ZStack {
+                    Color.black
+                        .ignoresSafeArea()
+                    Image(.burningCty)
+                        .resizable()
+                        .scaledToFill()
+                        .ignoresSafeArea()
+                    Image(.loneSloth)
+                        .resizable()
+                        .scaledToFit()
+                        .rotationEffect(.degrees(randomDouble))
+                        .position(randomPosition)
+                    // I stole this code from alex
+                        .offset(y: bounce ? -20 :150)
+                        .onAppear() {
+                            withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
+                                bounce.toggle()
                             }
                         }
-                        
-                        
-                        
+                    VStack {
+                        List {
+                            ForEach(offVM.listOfOffenses) { off in
+                                Text("\(off.name) on: \(off.date.formatted())")
+                            } .onDelete { index in
+                                deletedIndex = index
+                                isAlertShowing.toggle()
+                            }.alert("Are you sure you want to forgive Kiana?", isPresented: $isAlertShowing) {
+                                Button("Yes", role: .destructive) {
+                                    isShowingDog.toggle()
+                                }
+                            }
+                            .alert("Ok if you say so 😬" , isPresented: $ifYouSaySo) {
+                                Button("Forgive", role: .destructive){
+                                    deleteOff(indes: deletedIndex ?? IndexSet(integer: Int(1)))
+                                    forgive.toggle()
+                                }
+                            }
+                        }.scrollContentBackground(.hidden)
+                            .refreshable {
+                                try? await offVM.fetchOffenses()
+                            }
+                            .task {
+                                try? await offVM.fetchOffenses()
+                            }
                         Button("Add offense") {
                             showingSheet.toggle()
                         }
@@ -117,24 +119,40 @@ struct ContentView: View {
                                 .presentationDetents([.fraction(0.20)])
                                 .presentationDragIndicator(.visible)
                         }
+                    }.overlay{
+                        if isShowingDog {
+                            SusDog()
+                                .frame(width: 200,height: 150)
+                                .onAppear{
+                                    sounds.playSound(sound: .bam)
+                                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                                        isShowingDog.toggle()
+                                        ifYouSaySo.toggle()
+                                    })
+                                }
+                        }
+                        
+                        
                     }
-                case .failed(let error):
-                    Text("Something bad happened oops: \(error.localizedDescription)")
                 }
-            } .scrollContentBackground(.hidden)
-            .task {
-                try? await offVM.fetchOffenses()
+                case .failed(let error):
+                Text("Something bad happened oops: \(error.localizedDescription)")
+                }
+                
             }
-            .refreshable {
-                try? await offVM.fetchOffenses()
+        }
+        func deleteOff(indes: IndexSet){
+            for index in indes {                
+                let offense = offVM.listOfOffenses[index]
+                print(offense)
+
+                Task {
+                    try await offVM.delete(offense)
+                }
             }
         }
     }
-}
-
-
-
-
-#Preview {
-    ContentView()
-}
+    
+    #Preview {
+        ContentView()
+    }

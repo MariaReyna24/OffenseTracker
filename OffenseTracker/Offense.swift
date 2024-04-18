@@ -20,6 +20,7 @@ struct SingleOffense: Identifiable {
     }
     static var exampleOff = [SingleOffense(name: "Burnt my shake", date: Date.now), SingleOffense(name: "Another 1", date: Date.now)]
 }
+
 @MainActor
 class Offenses: ObservableObject{
     
@@ -41,6 +42,7 @@ class Offenses: ObservableObject{
             appState = .failed(error)
         }
     }
+    
     func saveNewEvent(withName name: String, date: Date) async throws {
         appState = .loading
         do {
@@ -52,6 +54,7 @@ class Offenses: ObservableObject{
             appState = .failed(error)
         }
     }
+    
     func delete(_ offToRemove: SingleOffense) async throws {
         appState = .loading
         do {

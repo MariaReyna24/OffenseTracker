@@ -27,11 +27,18 @@ class CloudKitService {
         
         try await database.save(record)
     }
+    
     public func fetchEvents() async throws -> [SingleOffense] {
         
         let predicate = NSPredicate(value: true)
         
         let query = CKQuery(recordType: "Offenses", predicate: predicate)
+        
+       let sortDes = [NSSortDescriptor(key: "date", ascending: false)]
+           
+        query.sortDescriptors = sortDes
+        
+        
         let (matchResults, _) = try await database.records(matching: query)
         let results = matchResults.map { matchResult in
             return matchResult.1
@@ -42,14 +49,15 @@ class CloudKitService {
             
         }
         let offenses: [SingleOffense] = records.compactMap { record in
-         guard let name = record["name"] as? String,
-               let date = record["date"] as? Date else {
-             return SingleOffense(name: "No name", date: Date.now)
-         }
-            return SingleOffense(name: name, date: date)
+            guard let name = record["name"] as? String,
+                  let date = record["date"] as? Date else {
+                return SingleOffense(name: "No name", date: Date.now)
+            }
+            return SingleOffense(id: "\(record.recordID.recordName)", name: name, date: date)
         }
         return offenses
     }
+    
     public func updateOffense(_ offense: SingleOffense) async throws {
         guard let fetchedRecord = try? await database.record(for: .init(recordName: offense.id)) else {
             throw CloudKitServiceError.recordNotInDatabase
@@ -60,7 +68,10 @@ class CloudKitService {
         
         _ = try await database.modifyRecords(saving: [record], deleting: [])
     }
+    
     public func delteEvent(_ offense: SingleOffense) async throws {
+        print("Offense id: \(offense.id)")
+        
         guard let fetchedRecord = try? await database.record(for: .init(recordName: offense.id)) else {
             throw CloudKitServiceError.recordNotInDatabase
         }
