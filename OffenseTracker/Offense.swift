@@ -22,12 +22,15 @@ struct SingleOffense: Identifiable {
 }
 @MainActor
 class Offenses: ObservableObject{
+    
     enum AppState {
         case loading, loaded, failed(Error)
     }
+    private let ckService = CloudKitService()
+    
     @Published var appState: AppState = .loaded
     @Published var listOfOffenses: [SingleOffense] = []
-    private let ckService = CloudKitService()
+   
    
     func fetchOffenses() async throws {
         appState = .loading
@@ -39,6 +42,7 @@ class Offenses: ObservableObject{
         }
     }
     func saveNewEvent(withName name: String, date: Date) async throws {
+        appState = .loading
         do {
             let off = SingleOffense(name: name, date: date)
             try await ckService.saveOff(off)

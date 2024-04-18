@@ -7,15 +7,16 @@
 
 import Foundation
 import CloudKit
+
 class CloudKitService {
     
     enum CloudKitServiceError: Error {
         case recordNotInDatabase
     }
     
-    let publicContainer = CKContainer(identifier: "iCloud.com.newOffenses.OffenseTracker")
+    private let container = CKContainer(identifier: "iCloud.newOffenses")
     
-    private lazy var database = publicContainer.publicCloudDatabase
+    private lazy var database = container.publicCloudDatabase
     
     
     public func saveOff(_ offense: SingleOffense) async throws {
@@ -23,21 +24,24 @@ class CloudKitService {
         
         record["name"] = offense.name
         record["date"] = offense.date
+        
         try await database.save(record)
     }
     public func fetchEvents() async throws -> [SingleOffense] {
+        
         let predicate = NSPredicate(value: true)
+        
         let query = CKQuery(recordType: "Offenses", predicate: predicate)
         let (matchResults, _) = try await database.records(matching: query)
-        let results = matchResults.map{ matchResult in
+        let results = matchResults.map { matchResult in
             return matchResult.1
         }
         
-        let records = results.compactMap{ result in
+        let records = results.compactMap { result in
             try? result.get()
             
         }
-        let offenses: [SingleOffense] = records.compactMap{ record in
+        let offenses: [SingleOffense] = records.compactMap { record in
          guard let name = record["name"] as? String,
                let date = record["date"] as? Date else {
              return SingleOffense(name: "No name", date: Date.now)

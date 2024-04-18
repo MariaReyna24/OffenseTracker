@@ -30,8 +30,8 @@ struct ContentView: View {
             Confirmation()
                 .onAppear {
                     sounds.playSound(sound: .sus)
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5, execute: {
-                        withAnimation(.easeOut(duration: 5)) {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
+                        withAnimation(.easeOut(duration: 3)) {
                             self.isCopShowing.toggle()
                             randomDouble = Double.random(in: 0...360)
                             randomPosition = CGPoint(x: Double.random(in: 100...300), y: Double.random(in: 200...500))
@@ -50,95 +50,91 @@ struct ContentView: View {
                     })
                 }
         } else {
-            ZStack {
-                Color.black
-                    .ignoresSafeArea()
-                Image(.burningCty)
-                    .resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
-                Image(.loneSloth)
-                    .resizable()
-                    .scaledToFit()
-                    .rotationEffect(.degrees(randomDouble))
-                    .position(randomPosition)
-                // I stole this code from alex
-                    .offset(y: bounce ? -20 :150)
-                    .onAppear() {
-                        withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
-                            bounce.toggle()
-                        }
-                    }
-                List {
+            List {
+                switch offVM.appState {
+                case .loading:
                     VStack {
-                        switch offVM.appState {
-                        case .loading:
-                            VStack {
-                                ProgressView()
-                                Text("Nothing to see here..")
-                            }
-                            .listRowBackground(EmptyView())
-                        case .loaded:
-                            
-                            ForEach(offVM.listOfOffenses) { off in
-                                Text(off.name)
-                                Text(off.date.formatted())
-                                
-                                
-                            } .onDelete { index in
-                                deletedIndex = index
-                                isAlertShowing.toggle()
-                            }.alert("Are you sure you want to forgive Kiana?", isPresented: $isAlertShowing) {
-                                Button("Yes", role: .destructive) {
-                                    isShowingDog.toggle()
+                        ProgressView()
+                        Text("Loading events...")
+                            .font(.caption)
+                    }.listRowBackground(EmptyView())
+                case .loaded:
+                    ZStack {
+                        Color.black
+                            .ignoresSafeArea()
+                        Image(.burningCty)
+                            .resizable()
+                            .scaledToFill()
+                            .ignoresSafeArea()
+                        Image(.loneSloth)
+                            .resizable()
+                            .scaledToFit()
+                            .rotationEffect(.degrees(randomDouble))
+                            .position(randomPosition)
+                        // I stole this code from alex
+                            .offset(y: bounce ? -20 :150)
+                            .onAppear() {
+                                withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
+                                    bounce.toggle()
                                 }
                             }
-                            .alert("Ok if you say so 😬" , isPresented: $ifYouSaySo) {
-                                Button("Forgive", role: .destructive){
-                                    //removeObj(at: deletedIndex ?? IndexSet(integer: Int(0)))
-                                    forgive.toggle()
+                        
+                        
+                        VStack {
+                            List {
+                                ForEach(offVM.listOfOffenses) { off in
+                                    Text("\(off.name) on: \(off.date.formatted())")
+                                } .onDelete { index in
+                                    deletedIndex = index
+                                    isAlertShowing.toggle()
+                                }.alert("Are you sure you want to forgive Kiana?", isPresented: $isAlertShowing) {
+                                    Button("Yes", role: .destructive) {
+                                        isShowingDog.toggle()
+                                    }
+                                }
+                                .alert("Ok if you say so 😬" , isPresented: $ifYouSaySo) {
+                                    Button("Forgive", role: .destructive){
+                                        //removeObj(at: deletedIndex ?? IndexSet(integer: Int(0)))
+                                        forgive.toggle()
+                                    }
                                 }
                             }
-                            Button("Add offense") {
-                                showingSheet.toggle()
-                            }
-                            .font(.system(size: 35))
-                            .foregroundStyle(.white)
-                            .buttonStyle(.borderedProminent)
-                            .padding(.all)
-                            .padding()
-                            .tint(.black)
-                            .sheet(isPresented: $showingSheet){
-                                sheetVIew(offVm: offVM, isCopShowing: $isCopShowing)
-                                    .presentationDetents([.fraction(0.20)])
-                                    .presentationDragIndicator(.visible)
-                            }
-                            .padding()
-                            .scrollContentBackground(.hidden)
-                        case .failed(let error):
-                            Text("Something bad happened oops: \(error.localizedDescription)")
                         }
                         
                         
                         
-                    }.overlay{
-                        if isShowingDog {
-                            SusDog()
-                                .frame(width: 200,height: 150)
-                                .onAppear{
-                                    sounds.playSound(sound: .bam)
-                                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
-                                        isShowingDog.toggle()
-                                        ifYouSaySo.toggle()
-                                    })
-                                }
+                        Button("Add offense") {
+                            showingSheet.toggle()
+                        }
+                        .font(.system(size: 35))
+                        .foregroundStyle(.white)
+                        .buttonStyle(.borderedProminent)
+                        .padding(.all)
+                        .padding()
+                        .tint(.black)
+                        .sheet(isPresented: $showingSheet){
+                            sheetVIew(offVm: offVM, isCopShowing: $isCopShowing)
+                                .presentationDetents([.fraction(0.20)])
+                                .presentationDragIndicator(.visible)
                         }
                     }
+                case .failed(let error):
+                    Text("Something bad happened oops: \(error.localizedDescription)")
                 }
+            } .scrollContentBackground(.hidden)
+            .task {
+                try? await offVM.fetchOffenses()
+            }
+            .refreshable {
+                try? await offVM.fetchOffenses()
             }
         }
     }
 }
+
+
+
+
 #Preview {
     ContentView()
 }
