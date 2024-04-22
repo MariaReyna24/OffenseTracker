@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A22D4B722BD2B3F1006BD347 /* bouncingSloth.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22D4B712BD2B3F1006BD347 /* bouncingSloth.swift */; };
 		A275899B2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A275899A2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift */; };
 		A275899D2B7AD6AF00B39EC1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A275899C2B7AD6AF00B39EC1 /* ContentView.swift */; };
 		A275899F2B7AD6B000B39EC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A275899E2B7AD6B000B39EC1 /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		A222DE732B893E4400575D66 /* OffenseTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OffenseTracker.entitlements; sourceTree = "<group>"; };
+		A22D4B712BD2B3F1006BD347 /* bouncingSloth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bouncingSloth.swift; sourceTree = "<group>"; };
 		A27589972B7AD6AF00B39EC1 /* OffenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OffenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A275899A2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffenseTrackerApp.swift; sourceTree = "<group>"; };
 		A275899C2B7AD6AF00B39EC1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				A2851B332BCEABEA0060E5C4 /* CloudKitService.swift */,
 				A275899A2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift */,
 				A275899C2B7AD6AF00B39EC1 /* ContentView.swift */,
+				A22D4B712BD2B3F1006BD347 /* bouncingSloth.swift */,
 				A2851B312BCEA9010060E5C4 /* SusDog.swift */,
 				A2851B292BCEA5EE0060E5C4 /* Forgiveness.swift */,
 				A2D7F7062BA8857900634C33 /* CoreDataStack.swift */,
@@ -315,6 +318,7 @@
 				A29186BA2BA0AF60007B8206 /* SoundManager.swift in Sources */,
 				A2D7F7072BA8857900634C33 /* CoreDataStack.swift in Sources */,
 				A2851B342BCEABEA0060E5C4 /* CloudKitService.swift in Sources */,
+				A22D4B722BD2B3F1006BD347 /* bouncingSloth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,7 +481,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OffenseTracker/OffenseTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"OffenseTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 895F6NWJ4A;
 				ENABLE_PREVIEWS = YES;
@@ -512,7 +516,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OffenseTracker/OffenseTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"OffenseTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 895F6NWJ4A;
 				ENABLE_PREVIEWS = YES;

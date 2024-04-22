@@ -52,14 +52,12 @@ struct ContentView: View {
         } else {
             switch offVM.appState {
             case .loading:
-                VStack {
-                    ProgressView()
-                    Text("Loading events...")
-                        .font(.caption)
-                }
-                .task {
-                    try? await offVM.fetchOffenses()
-                }
+                ProgressView()
+                Text("Loading Kiana's Offenses...")
+                    .font(.largeTitle)
+                    .task {
+                        try? await offVM.fetchOffenses()
+                    }
             case .loaded:
                 ZStack {
                     Color.black
@@ -75,15 +73,16 @@ struct ContentView: View {
                         .position(randomPosition)
                     // I stole this code from alex
                         .offset(y: bounce ? -20 :150)
-                        .onAppear() {
-                            withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
-                                bounce.toggle()
-                            }
+                        .onAppear {
+                                withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true).delay(0.2)) {
+                                    bounce.toggle()
+                                }
                         }
                     VStack {
+                        Spacer()
                         List {
                             ForEach(offVM.listOfOffenses) { off in
-                                Text("\(off.name) on: \(off.date.formatted())")
+                                Text("\(off.name) on \(off.date.formatted())")
                             } .onDelete { index in
                                 deletedIndex = index
                                 isAlertShowing.toggle()
@@ -98,13 +97,15 @@ struct ContentView: View {
                                     forgive.toggle()
                                 }
                             }
-                        }.scrollContentBackground(.hidden)
-                            .refreshable {
-                                try? await offVM.fetchOffenses()
-                            }
-                            .task {
-                                try? await offVM.fetchOffenses()
-                            }
+                        }
+                        .scrollContentBackground(.hidden)
+                        .padding()
+                        .refreshable {
+                            try? await offVM.fetchOffenses()
+                        }
+                        .task {
+                            try? await offVM.fetchOffenses()
+                        }
                         Button("Add offense") {
                             showingSheet.toggle()
                         }
@@ -135,24 +136,24 @@ struct ContentView: View {
                         
                     }
                 }
-                case .failed(let error):
-                Text("Something bad happened oops: \(error.localizedDescription)")
-                }
                 
+            case .failed(let error):
+                Text("Something bad happened oops: \(error.localizedDescription)")
+            }
+            
+        }
+    }
+    func deleteOff(indes: IndexSet){
+        for index in indes {
+            let offense = offVM.listOfOffenses[index]
+            print(offense)
+            Task {
+                try await offVM.delete(offense)
             }
         }
-        func deleteOff(indes: IndexSet){
-            for index in indes {                
-                let offense = offVM.listOfOffenses[index]
-                print(offense)
+    }
+}
 
-                Task {
-                    try await offVM.delete(offense)
-                }
-            }
-        }
-    }
-    
-    #Preview {
-        ContentView()
-    }
+#Preview {
+    ContentView()
+}
