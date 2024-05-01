@@ -20,12 +20,16 @@ struct Confirmation: View {
                 .ignoresSafeArea()
             VStack() {
                 VortexView(.fire) {
-                    RoundedRectangle(cornerRadius: 250)
-                        .fill(.red)
-                        .blendMode(.plusLighter)
-                        .frame(height: 200)
-                        .tag("circle")
-                        .containerRelativeFrame(.vertical)
+                    if #available(iOS 17.0, *) {
+                        RoundedRectangle(cornerRadius: 250)
+                            .fill(.red)
+                            .blendMode(.plusLighter)
+                            .frame(height: 200)
+                            .tag("circle")
+                            .containerRelativeFrame(.vertical)
+                    } else {
+                        // Fallback on earlier versions
+                    }
                 }
             }
             VStack{

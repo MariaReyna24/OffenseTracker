@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 import CloudKit
 import CoreData
+import PhotosUI
 
 struct sheetVIew: View {
     @ObservedObject var offVm: Offenses
@@ -18,14 +19,15 @@ struct sheetVIew: View {
     @Binding var isCopShowing: Bool
     var body: some View {
         ZStack{
-            Image(.slothArmy)
+            Image(.burningSloths)
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
-            VStack{
+            VStack {
                 TextField("Enter Kiana's offense", text: $newOffense)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+                //.padding()
+                
                 Button(action: {
                     addOff()
                     dismiss()
@@ -53,10 +55,11 @@ struct sheetVIew: View {
                 isShowingError = true
             }
         }
+      
     }
 
 }
 
-//#Preview {
-//
-//}
+#Preview {
+    sheetVIew(offVm: Offenses(), isCopShowing: .constant(true))
+}

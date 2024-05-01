@@ -11,6 +11,7 @@ import Vortex
 
 enum phases: CaseIterable {
     case up, down
+    @available(iOS 17.0, *)
     var move: any Transition {
         switch self {
         case .up: MoveTransition(edge: .top)
@@ -36,19 +37,23 @@ struct Forgiveness: View {
                 }
             }
             VStack{
-                Image(.slothA)
-                    .resizable()
-                    .scaledToFit()
-                    .offset(y: bounce ? -20 :400)
-                    .onAppear() {
-                        withAnimation(Animation.easeInOut(duration: 3).repeatForever(autoreverses: true)) {
-                            bounce.toggle()
+                if #available(iOS 17.0, *) {
+                    Image(.slothA)
+                        .resizable()
+                        .scaledToFit()
+                        .offset(y: bounce ? -20 :400)
+                        .onAppear() {
+                            withAnimation(Animation.easeInOut(duration: 3).repeatForever(autoreverses: true)) {
+                                bounce.toggle()
+                            }
                         }
-                    }
-                    .phaseAnimator(phases.allCases) { content, phase in
-                        content
-                            .transition(.move(edge: .top))
-                    }
+                        .phaseAnimator(phases.allCases) { content, phase in
+                            content
+                                .transition(.move(edge: .top))
+                        }
+                } else {
+                    // Fallback on earlier versions
+                }
                 Text("The Sloth gods thank you for your forgivness")
                     .font(.largeTitle)
                     .foregroundStyle(.black)

@@ -7,6 +7,8 @@
 
 import Foundation
 import CloudKit
+import UserNotifications
+import UIKit
 
 struct SingleOffense: Identifiable {
     var id: String
@@ -31,10 +33,10 @@ class Offenses: ObservableObject{
     
     @Published var appState: AppState = .loaded
     @Published var listOfOffenses: [SingleOffense] = []
-   
-   
+    
+    
     func fetchOffenses() async throws {
-        appState = .loading
+        
         do {
             self.listOfOffenses = try await ckService.fetchEvents()
             appState = .loaded
@@ -81,6 +83,52 @@ class Offenses: ObservableObject{
             
         } catch {
             appState = .failed(error)
+        }
+    }
+    func requestNotifPermission() {
+        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+        UNUserNotificationCenter.current().requestAuthorization(options: options) { success, error in
+            if let error = error {
+                print(error)
+            } else if success {
+                print("Notfication permisstions success")
+                DispatchQueue.main.async{
+                    UIApplication.shared.registerForRemoteNotifications()
+                    self.subscribeNotification()
+                    
+                }
+                
+            } else {
+                print("Notification permission failed")
+                
+            }
+        }
+        
+        
+    }
+    
+    
+    
+    func subscribeNotification() {
+        let container = CKContainer(identifier: "iCloud.newOffenses")
+        
+        let predicate = NSPredicate(value: true)
+        
+        let subscription = CKQuerySubscription(recordType: "Offenses", predicate: predicate, subscriptionID: "Offenses_added_to_database", options: .firesOnRecordCreation)
+        
+        let notification = CKSubscription.NotificationInfo()
+        notification.title = "Kiana messed up"
+        notification.alertBody = "Come see what she did"
+        notification.soundName = "default"
+        
+        subscription.notificationInfo = notification
+        
+        container.publicCloudDatabase.save(subscription) { returnedSub, returnedError in
+            if let error = returnedError {
+                print("It failed: \(error.localizedDescription)")
+            } else {
+                print("Successfully subscribed to notfications!")
+            }
         }
     }
 }

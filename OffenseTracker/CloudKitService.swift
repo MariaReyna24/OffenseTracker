@@ -77,3 +77,4 @@ class CloudKitService {
         }
         _ = try await database.modifyRecords(saving: [], deleting: [fetchedRecord.recordID])    }
 }
+

@@ -74,15 +74,16 @@ struct ContentView: View {
                     // I stole this code from alex
                         .offset(y: bounce ? -20 :150)
                         .onAppear {
-                                withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true).delay(0.2)) {
-                                    bounce.toggle()
-                                }
+                            withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true).delay(0.2)) {
+                                bounce.toggle()
+                            }
                         }
                     VStack {
                         Spacer()
                         List {
                             ForEach(offVM.listOfOffenses) { off in
-                                Text("\(off.name) on \(off.date.formatted())")
+                                Text("\(off.name). Reported on \(off.date.formatted())")
+                                
                             } .onDelete { index in
                                 deletedIndex = index
                                 isAlertShowing.toggle()
@@ -106,6 +107,7 @@ struct ContentView: View {
                         .task {
                             try? await offVM.fetchOffenses()
                         }
+                        
                         Button("Add offense") {
                             showingSheet.toggle()
                         }
@@ -117,7 +119,7 @@ struct ContentView: View {
                         .tint(.black)
                         .sheet(isPresented: $showingSheet){
                             sheetVIew(offVm: offVM, isCopShowing: $isCopShowing)
-                                .presentationDetents([.fraction(0.20)])
+                                .presentationDetents([.fraction(0.35)])
                                 .presentationDragIndicator(.visible)
                         }
                     }.overlay{
@@ -135,8 +137,9 @@ struct ContentView: View {
                         
                         
                     }
+                }.onAppear {
+                    offVM.requestNotifPermission()
                 }
-                
             case .failed(let error):
                 Text("Something bad happened oops: \(error.localizedDescription)")
             }
