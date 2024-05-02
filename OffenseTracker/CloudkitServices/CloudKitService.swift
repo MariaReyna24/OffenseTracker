@@ -75,6 +75,9 @@ class CloudKitService {
         guard let fetchedRecord = try? await database.record(for: .init(recordName: offense.id)) else {
             throw CloudKitServiceError.recordNotInDatabase
         }
-        _ = try await database.modifyRecords(saving: [], deleting: [fetchedRecord.recordID])    }
+        _ = try await database.modifyRecords(saving: [], deleting: [fetchedRecord.recordID])
+    }
+   
+    
 }
 

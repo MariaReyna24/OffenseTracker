@@ -1,3 +1,4 @@
+
 //
 //  ContentView.swift
 //  OffenseTracker
@@ -82,7 +83,7 @@ struct ContentView: View {
                         Spacer()
                         List {
                             ForEach(offVM.listOfOffenses) { off in
-                                Text("\(off.name). Reported on \(off.date.formatted())")
+                                Text("\(off.name), Reported on \(off.date.formatted())")
                                 
                             } .onDelete { index in
                                 deletedIndex = index
@@ -118,8 +119,8 @@ struct ContentView: View {
                         .padding()
                         .tint(.black)
                         .sheet(isPresented: $showingSheet){
-                            sheetVIew(offVm: offVM, isCopShowing: $isCopShowing)
-                                .presentationDetents([.fraction(0.35)])
+                            AddOffense(offVm: offVM, isCopShowing: $isCopShowing)
+                                .presentationDetents([.fraction(offVM.addedImage ? 0.55: 0.40)])
                                 .presentationDragIndicator(.visible)
                         }
                     }.overlay{

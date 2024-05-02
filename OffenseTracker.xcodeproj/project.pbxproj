@@ -15,7 +15,7 @@
 		A27589B62B7AD6B000B39EC1 /* OffenseTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27589B52B7AD6B000B39EC1 /* OffenseTrackerUITests.swift */; };
 		A27589B82B7AD6B000B39EC1 /* OffenseTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27589B72B7AD6B000B39EC1 /* OffenseTrackerUITestsLaunchTests.swift */; };
 		A27589C52B7AD85600B39EC1 /* Offense.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27589C42B7AD85600B39EC1 /* Offense.swift */; };
-		A27589C72B7ADB6800B39EC1 /* sheetVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27589C62B7ADB6800B39EC1 /* sheetVIew.swift */; };
+		A27589C72B7ADB6800B39EC1 /* AddOffense.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27589C62B7ADB6800B39EC1 /* AddOffense.swift */; };
 		A2851B2A2BCEA5EE0060E5C4 /* Forgiveness.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2851B292BCEA5EE0060E5C4 /* Forgiveness.swift */; };
 		A2851B2C2BCEA6740060E5C4 /* angels.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2851B2B2BCEA6740060E5C4 /* angels.mp3 */; };
 		A2851B2E2BCEA6790060E5C4 /* bam.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2851B2D2BCEA6790060E5C4 /* bam.mp3 */; };
@@ -25,9 +25,7 @@
 		A29186802BA090DB007B8206 /* Vortex in Frameworks */ = {isa = PBXBuildFile; productRef = A291867F2BA090DB007B8206 /* Vortex */; };
 		A29186BA2BA0AF60007B8206 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29186B92BA0AF60007B8206 /* SoundManager.swift */; };
 		A29186BC2BA0C983007B8206 /* sus.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A29186BB2BA0C983007B8206 /* sus.mp3 */; };
-		A2D7F7072BA8857900634C33 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D7F7062BA8857900634C33 /* CoreDataStack.swift */; };
 		A2ED59662BE1366300A84192 /* womp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2ED59652BE1366200A84192 /* womp.mp3 */; };
-		A2ED59682BE28F7F00A84192 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2ED59672BE28F7F00A84192 /* ImagePickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +58,7 @@
 		A27589B52B7AD6B000B39EC1 /* OffenseTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffenseTrackerUITests.swift; sourceTree = "<group>"; };
 		A27589B72B7AD6B000B39EC1 /* OffenseTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffenseTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A27589C42B7AD85600B39EC1 /* Offense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offense.swift; sourceTree = "<group>"; };
-		A27589C62B7ADB6800B39EC1 /* sheetVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sheetVIew.swift; sourceTree = "<group>"; };
+		A27589C62B7ADB6800B39EC1 /* AddOffense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOffense.swift; sourceTree = "<group>"; };
 		A2851B292BCEA5EE0060E5C4 /* Forgiveness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forgiveness.swift; sourceTree = "<group>"; };
 		A2851B2B2BCEA6740060E5C4 /* angels.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = angels.mp3; sourceTree = "<group>"; };
 		A2851B2D2BCEA6790060E5C4 /* bam.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bam.mp3; sourceTree = "<group>"; };
@@ -70,9 +68,7 @@
 		A29186B92BA0AF60007B8206 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		A29186BB2BA0C983007B8206 /* sus.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sus.mp3; sourceTree = "<group>"; };
 		A293E1A92BA22472001F2462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		A2D7F7062BA8857900634C33 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		A2ED59652BE1366200A84192 /* womp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = womp.mp3; sourceTree = "<group>"; };
-		A2ED59672BE28F7F00A84192 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,21 +122,11 @@
 			children = (
 				A293E1A92BA22472001F2462 /* Info.plist */,
 				A222DE732B893E4400575D66 /* OffenseTracker.entitlements */,
-				A29186BB2BA0C983007B8206 /* sus.mp3 */,
-				A2851B2B2BCEA6740060E5C4 /* angels.mp3 */,
-				A2851B2D2BCEA6790060E5C4 /* bam.mp3 */,
-				A2ED59652BE1366200A84192 /* womp.mp3 */,
-				A2851B332BCEABEA0060E5C4 /* CloudKitService.swift */,
 				A275899A2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift */,
-				A275899C2B7AD6AF00B39EC1 /* ContentView.swift */,
-				A2ED59672BE28F7F00A84192 /* ImagePickerView.swift */,
-				A2851B312BCEA9010060E5C4 /* SusDog.swift */,
-				A2851B292BCEA5EE0060E5C4 /* Forgiveness.swift */,
-				A2D7F7062BA8857900634C33 /* CoreDataStack.swift */,
-				A29186B92BA0AF60007B8206 /* SoundManager.swift */,
-				A27589C62B7ADB6800B39EC1 /* sheetVIew.swift */,
-				A291860D2B9F3A60007B8206 /* Confirmation.swift */,
-				A27589C42B7AD85600B39EC1 /* Offense.swift */,
+				A2ED59E52BE40F3700A84192 /* CloudkitServices */,
+				A2ED59E62BE40F4E00A84192 /* Views */,
+				A2ED59E72BE40F7D00A84192 /* DataModel */,
+				A2ED59E42BE40F2A00A84192 /* Sounds */,
 				A275899E2B7AD6B000B39EC1 /* Assets.xcassets */,
 				A27589A02B7AD6B000B39EC1 /* Preview Content */,
 			);
@@ -170,6 +156,46 @@
 				A27589B72B7AD6B000B39EC1 /* OffenseTrackerUITestsLaunchTests.swift */,
 			);
 			path = OffenseTrackerUITests;
+			sourceTree = "<group>";
+		};
+		A2ED59E42BE40F2A00A84192 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				A29186B92BA0AF60007B8206 /* SoundManager.swift */,
+				A29186BB2BA0C983007B8206 /* sus.mp3 */,
+				A2851B2B2BCEA6740060E5C4 /* angels.mp3 */,
+				A2851B2D2BCEA6790060E5C4 /* bam.mp3 */,
+				A2ED59652BE1366200A84192 /* womp.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		A2ED59E52BE40F3700A84192 /* CloudkitServices */ = {
+			isa = PBXGroup;
+			children = (
+				A2851B332BCEABEA0060E5C4 /* CloudKitService.swift */,
+			);
+			path = CloudkitServices;
+			sourceTree = "<group>";
+		};
+		A2ED59E62BE40F4E00A84192 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A275899C2B7AD6AF00B39EC1 /* ContentView.swift */,
+				A2851B312BCEA9010060E5C4 /* SusDog.swift */,
+				A27589C62B7ADB6800B39EC1 /* AddOffense.swift */,
+				A291860D2B9F3A60007B8206 /* Confirmation.swift */,
+				A2851B292BCEA5EE0060E5C4 /* Forgiveness.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A2ED59E72BE40F7D00A84192 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				A27589C42B7AD85600B39EC1 /* Offense.swift */,
+			);
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,13 +341,11 @@
 				A2851B322BCEA9010060E5C4 /* SusDog.swift in Sources */,
 				A27589C52B7AD85600B39EC1 /* Offense.swift in Sources */,
 				A275899D2B7AD6AF00B39EC1 /* ContentView.swift in Sources */,
-				A2ED59682BE28F7F00A84192 /* ImagePickerView.swift in Sources */,
 				A291860E2B9F3A60007B8206 /* Confirmation.swift in Sources */,
-				A27589C72B7ADB6800B39EC1 /* sheetVIew.swift in Sources */,
+				A27589C72B7ADB6800B39EC1 /* AddOffense.swift in Sources */,
 				A275899B2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift in Sources */,
 				A2851B2A2BCEA5EE0060E5C4 /* Forgiveness.swift in Sources */,
 				A29186BA2BA0AF60007B8206 /* SoundManager.swift in Sources */,
-				A2D7F7072BA8857900634C33 /* CoreDataStack.swift in Sources */,
 				A2851B342BCEABEA0060E5C4 /* CloudKitService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -485,7 +509,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OffenseTracker/OffenseTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10.1;
+				CURRENT_PROJECT_VERSION = 10.4;
 				DEVELOPMENT_ASSET_PATHS = "\"OffenseTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 895F6NWJ4A;
 				ENABLE_PREVIEWS = YES;
@@ -522,7 +546,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = OffenseTracker/OffenseTracker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10.1;
+				CURRENT_PROJECT_VERSION = 10.4;
 				DEVELOPMENT_ASSET_PATHS = "\"OffenseTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 895F6NWJ4A;
 				ENABLE_PREVIEWS = YES;

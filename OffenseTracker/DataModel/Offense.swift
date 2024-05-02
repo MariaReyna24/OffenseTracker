@@ -33,6 +33,7 @@ class Offenses: ObservableObject{
     
     @Published var appState: AppState = .loaded
     @Published var listOfOffenses: [SingleOffense] = []
+    @Published var addedImage = false
     
     
     func fetchOffenses() async throws {
@@ -95,7 +96,6 @@ class Offenses: ObservableObject{
                 DispatchQueue.main.async{
                     UIApplication.shared.registerForRemoteNotifications()
                     self.subscribeNotification()
-                    
                 }
                 
             } else {
@@ -106,8 +106,6 @@ class Offenses: ObservableObject{
         
         
     }
-    
-    
     
     func subscribeNotification() {
         let container = CKContainer(identifier: "iCloud.newOffenses")
@@ -131,4 +129,7 @@ class Offenses: ObservableObject{
             }
         }
     }
+    
+    
+    
 }

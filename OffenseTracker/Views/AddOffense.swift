@@ -11,7 +11,9 @@ import CloudKit
 import CoreData
 import PhotosUI
 
-struct sheetVIew: View {
+struct AddOffense: View {
+    @State private var pickerItem: PhotosPickerItem?
+    @State private var selectedImage: Image?
     @ObservedObject var offVm: Offenses
     @Environment(\.dismiss) var dismiss
     @State var newOffense = ""
@@ -23,11 +25,30 @@ struct sheetVIew: View {
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
-            VStack {
+            VStack() {
+                selectedImage?
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 250, height: 100)
+                    .padding()
                 TextField("Enter Kiana's offense", text: $newOffense)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                //.padding()
+                .padding()
                 
+                VStack{
+                    PhotosPicker("Upload a photo", selection: $pickerItem, matching: .images)
+                        .foregroundStyle(.white)
+                        .padding()
+                        .background(.black)
+                        .cornerRadius(50)
+                        .onChange(of: pickerItem){
+                            Task{
+                                selectedImage = try await pickerItem?.loadTransferable(type: Image.self)
+                                offVm.addedImage.toggle()
+                            }
+                        }
+                }
+
                 Button(action: {
                     addOff()
                     dismiss()
@@ -61,5 +82,5 @@ struct sheetVIew: View {
 }
 
 #Preview {
-    sheetVIew(offVm: Offenses(), isCopShowing: .constant(true))
+    AddOffense(offVm: Offenses(), isCopShowing: .constant(true))
 }
