@@ -14,13 +14,18 @@ struct SingleOffense: Identifiable {
     var id: String
     var name: String
     var date: Date
+    var emojis: [String]
+    var count: Int
     
-    init(id: String = UUID().uuidString, name: String, date: Date) {
+    init(id: String = UUID().uuidString, name: String, date: Date, emojis: [String], count: Int) {
         self.id = id
         self.name = name
         self.date = date
+        self.emojis = emojis
+        self.count = count
     }
-    static var exampleOff = [SingleOffense(name: "Burnt my shake", date: Date.now), SingleOffense(name: "Another 1", date: Date.now)]
+//    static var exampleOff = [SingleOffense(name: "Burnt my shake", date: Date.now, emojis: [("👎"),("👿")], count: 0, SingleOffense(name: "Another 1", date: Date.now, emojis: [("👎"),("👿")], count: 0)]
+    static var exampleOff = [SingleOffense(name: "Burny my shake", date: Date.now, emojis: ["👎","👿"], count: 0), SingleOffense(name: "Another 1", date: Date.now, emojis: ["👎","👿"], count: 0)]
 }
 
 @MainActor
@@ -34,7 +39,8 @@ class Offenses: ObservableObject{
     @Published var appState: AppState = .loaded
     @Published var listOfOffenses: [SingleOffense] = []
     @Published var addedImage = false
-    
+    @Published var count = 0 
+    //@Published var reactions: [Reactions] = [Reactions(emoji: "👎", count: 0), Reactions(emoji: "👿", count: 0)]
     
     func fetchOffenses() async throws {
         
@@ -46,10 +52,10 @@ class Offenses: ObservableObject{
         }
     }
     
-    func saveNewEvent(withName name: String, date: Date) async throws {
+    func saveNewEvent(withName name: String, date: Date, emojis: [String], count: Int) async throws {
         appState = .loading
         do {
-            let off = SingleOffense(name: name, date: date)
+            let off = SingleOffense(name: name, date: date, emojis: emojis, count: 0)
             try await ckService.saveOff(off)
             listOfOffenses.append(off)
             appState = .loaded

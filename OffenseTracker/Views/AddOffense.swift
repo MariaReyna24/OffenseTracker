@@ -70,7 +70,7 @@ struct AddOffense: View {
     func addOff(){
         Task {
             do {
-                try await offVm.saveNewEvent(withName: newOffense, date: Date.now)
+                try await offVm.saveNewEvent(withName: newOffense, date: Date.now, emojis: ["👎","👿"], count: 0)
                 dismiss()
             } catch {
                 isShowingError = true

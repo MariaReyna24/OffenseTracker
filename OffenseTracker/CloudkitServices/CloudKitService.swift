@@ -24,6 +24,8 @@ class CloudKitService {
         
         record["name"] = offense.name
         record["date"] = offense.date
+        record["emojis"] = offense.emojis
+        record["count"] = offense.count
         
         try await database.save(record)
     }
@@ -34,8 +36,8 @@ class CloudKitService {
         
         let query = CKQuery(recordType: "Offenses", predicate: predicate)
         
-       let sortDes = [NSSortDescriptor(key: "date", ascending: false)]
-           
+        let sortDes = [NSSortDescriptor(key: "date", ascending: false)]
+        
         query.sortDescriptors = sortDes
         
         
@@ -50,10 +52,12 @@ class CloudKitService {
         }
         let offenses: [SingleOffense] = records.compactMap { record in
             guard let name = record["name"] as? String,
-                  let date = record["date"] as? Date else {
-                return SingleOffense(name: "No name", date: Date.now)
+                  let date = record["date"] as? Date,
+                  let emojis = record["emojis"] as? [String],
+                  let count = record["count"] as? Int else {
+                return SingleOffense(name: "No name", date: Date.now, emojis: ["none"], count: 0)
             }
-            return SingleOffense(id: "\(record.recordID.recordName)", name: name, date: date)
+            return SingleOffense(id: "\(record.recordID.recordName)", name: name, date: date, emojis: emojis, count: count)
         }
         return offenses
     }
@@ -77,7 +81,7 @@ class CloudKitService {
         }
         _ = try await database.modifyRecords(saving: [], deleting: [fetchedRecord.recordID])
     }
-   
+    
     
 }
 

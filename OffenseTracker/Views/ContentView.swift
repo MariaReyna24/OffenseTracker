@@ -23,7 +23,7 @@ struct ContentView: View {
     @State var randomPosition = CGPoint(x: 200, y: 400)
     @Environment(\.managedObjectContext) private var viewContext
     @State private var bounce = false
-    @StateObject var offVM = Offenses()
+    @ObservedObject var offVM = Offenses()
     @State private var ifYouSaySo = false
     @State private var isShowingDog = false
     var body: some View {
@@ -83,12 +83,19 @@ struct ContentView: View {
                         Spacer()
                         List {
                             ForEach(offVM.listOfOffenses) { off in
-                                Text("\(off.name), Reported on \(off.date.formatted())")
-                                
+                                Text("\(off.name), Reported on \(off.date.formatted()))")
+                                Button{
+                                    
+                                } label: {
+                                    Text("\(off.emojis),\(off.count)")
+                                }
+                               
                             } .onDelete { index in
                                 deletedIndex = index
                                 isAlertShowing.toggle()
-                            }.alert("Are you sure you want to forgive Kiana?", isPresented: $isAlertShowing) {
+                            }
+                            
+                            .alert("Are you sure you want to forgive Kiana?", isPresented: $isAlertShowing) {
                                 Button("Yes", role: .destructive) {
                                     isShowingDog.toggle()
                                 }
@@ -99,6 +106,8 @@ struct ContentView: View {
                                     forgive.toggle()
                                 }
                             }
+                            
+                            
                         }
                         .scrollContentBackground(.hidden)
                         .padding()
