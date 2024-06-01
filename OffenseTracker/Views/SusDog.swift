@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct SusDog: View {
+    @State var name = ""
     @ObservedObject var sounds = SoundManager()
     var body: some View {
         Image(.sussy)
             .resizable()
             .frame(width: 300,height: 300)
+        TextField("Enter name", text: $name)
     }
     
 }

@@ -58,7 +58,6 @@ struct AddOffense: View {
                     
                 }) {
                     Text("Offense taken note")
-                    
                 }
                 .foregroundStyle(.white)
                 .padding()
@@ -70,7 +69,7 @@ struct AddOffense: View {
     func addOff(){
         Task {
             do {
-                try await offVm.saveNewEvent(withName: newOffense, date: Date.now, emojis: ["👎","👿"], count: 0)
+                try await offVm.saveNewEvent(withName: newOffense, date: Date.now, emojis: ["👎"], count: 0)
                 dismiss()
             } catch {
                 isShowingError = true

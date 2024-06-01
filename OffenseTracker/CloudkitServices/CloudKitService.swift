@@ -9,7 +9,6 @@ import Foundation
 import CloudKit
 
 class CloudKitService {
-    
     enum CloudKitServiceError: Error {
         case recordNotInDatabase
     }
@@ -17,7 +16,6 @@ class CloudKitService {
     private let container = CKContainer(identifier: "iCloud.newOffenses")
     
     private lazy var database = container.publicCloudDatabase
-    
     
     public func saveOff(_ offense: SingleOffense) async throws {
         let record = CKRecord(recordType: "Offenses", recordID: .init(recordName: offense.id))
@@ -55,7 +53,7 @@ class CloudKitService {
                   let date = record["date"] as? Date,
                   let emojis = record["emojis"] as? [String],
                   let count = record["count"] as? Int else {
-                return SingleOffense(name: "No name", date: Date.now, emojis: ["none"], count: 0)
+                return SingleOffense(name: "No record found", date: Date.now, emojis: ["none"], count: 0)
             }
             return SingleOffense(id: "\(record.recordID.recordName)", name: name, date: date, emojis: emojis, count: count)
         }
@@ -69,6 +67,8 @@ class CloudKitService {
         let record = CKRecord(recordType: "Offenses", recordID: fetchedRecord.recordID)
         record["name"] = offense.name
         record["date"] = offense.date
+        record["emojis"] = offense.emojis
+        record["count"] = offense.count
         
         _ = try await database.modifyRecords(saving: [record], deleting: [])
     }

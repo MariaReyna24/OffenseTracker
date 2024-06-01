@@ -24,7 +24,7 @@ struct SingleOffense: Identifiable {
         self.emojis = emojis
         self.count = count
     }
-//    static var exampleOff = [SingleOffense(name: "Burnt my shake", date: Date.now, emojis: [("👎"),("👿")], count: 0, SingleOffense(name: "Another 1", date: Date.now, emojis: [("👎"),("👿")], count: 0)]
+    
     static var exampleOff = [SingleOffense(name: "Burny my shake", date: Date.now, emojis: ["👎","👿"], count: 0), SingleOffense(name: "Another 1", date: Date.now, emojis: ["👎","👿"], count: 0)]
 }
 
@@ -39,7 +39,7 @@ class Offenses: ObservableObject{
     @Published var appState: AppState = .loaded
     @Published var listOfOffenses: [SingleOffense] = []
     @Published var addedImage = false
-    @Published var count = 0 
+    
     //@Published var reactions: [Reactions] = [Reactions(emoji: "👎", count: 0), Reactions(emoji: "👿", count: 0)]
     
     func fetchOffenses() async throws {
