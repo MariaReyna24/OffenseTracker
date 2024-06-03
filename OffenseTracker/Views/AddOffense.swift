@@ -12,12 +12,13 @@ import CoreData
 import PhotosUI
 
 struct AddOffense: View {
+    @State var isEmpty = true
     @State private var pickerItem: PhotosPickerItem?
     @State private var selectedImage: Image?
     @ObservedObject var offVm: Offenses
     @Environment(\.dismiss) var dismiss
     @State var newOffense = ""
-    @State private var isShowingError = false
+    @State private var isShowingError = true
     @Binding var isCopShowing: Bool
     var body: some View {
         ZStack{
@@ -33,21 +34,24 @@ struct AddOffense: View {
                     .padding()
                 TextField("Enter Kiana's offense", text: $newOffense)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-                
-                VStack{
-                    PhotosPicker("Upload a photo", selection: $pickerItem, matching: .images)
-                        .foregroundStyle(.white)
-                        .padding()
-                        .background(.black)
-                        .cornerRadius(50)
-                        .onChange(of: pickerItem){
-                            Task{
-                                selectedImage = try await pickerItem?.loadTransferable(type: Image.self)
-                                offVm.addedImage.toggle()
-                            }
-                        }
-                }
+                    .onChange(of: newOffense){
+                        isEmpty.toggle()
+                    }
+                    .padding()
+//
+//                VStack{
+//                    PhotosPicker("Upload a photo", selection: $pickerItem, matching: .images)
+//                        .foregroundStyle(.white)
+//                        .padding()
+//                        .background(.black)
+//                        .cornerRadius(50)
+//                        .onChange(of: pickerItem){
+//                            Task{
+//                                selectedImage = try await pickerItem?.loadTransferable(type: Image.self)
+//                                offVm.addedImage.toggle()
+//                            }
+//                        }
+//                }
 
                 Button(action: {
                     addOff()
@@ -64,9 +68,12 @@ struct AddOffense: View {
                 .padding()
                 .background(.black)
                 .cornerRadius(50)
+                .disabled(isEmpty)
+                .opacity(isEmpty ? 0.7: 1.0)
             }
         }
     }
+    
     func addOff(){
         Task {
             do {
