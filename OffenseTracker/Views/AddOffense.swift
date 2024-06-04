@@ -64,8 +64,8 @@ struct AddOffense: View {
                 .padding()
                 .background(.black)
                 .cornerRadius(50)
-                .disabled(newOffense.isEmpty)
-                .opacity(newOffense.isEmpty ? 0.7: 1.0)
+                .disabled(newOffense.isEmpty || newOffense.count > 50)
+                .opacity(newOffense.isEmpty || newOffense.count > 50 ? 0.7: 1.0)
             }
         }
         
