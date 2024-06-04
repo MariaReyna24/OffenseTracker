@@ -12,7 +12,6 @@ import CoreData
 import PhotosUI
 
 struct AddOffense: View {
-    @State var isEmpty = true
     @State private var pickerItem: PhotosPickerItem?
     @State private var selectedImage: Image?
     @ObservedObject var offVm: Offenses
@@ -21,7 +20,7 @@ struct AddOffense: View {
     @State private var isShowingError = true
     @Binding var isCopShowing: Bool
     var body: some View {
-        ZStack{
+        ZStack {
             Image(.burningSloths)
                 .resizable()
                 .scaledToFill()
@@ -34,9 +33,6 @@ struct AddOffense: View {
                     .padding()
                 TextField("Enter Kiana's offense", text: $newOffense)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .onChange(of: newOffense){
-                        isEmpty.toggle()
-                    }
                     .padding()
 //
 //                VStack{
@@ -68,12 +64,12 @@ struct AddOffense: View {
                 .padding()
                 .background(.black)
                 .cornerRadius(50)
-                .disabled(isEmpty)
-                .opacity(isEmpty ? 0.7: 1.0)
+                .disabled(newOffense.isEmpty)
+                .opacity(newOffense.isEmpty ? 0.7: 1.0)
             }
         }
+        
     }
-    
     func addOff(){
         Task {
             do {
