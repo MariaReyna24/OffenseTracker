@@ -18,6 +18,18 @@ class CloudKitService {
     
     private lazy var database = container.publicCloudDatabase
     
+    public func saveReaction(_ react: Reaction) async throws {
+        
+        let record = CKRecord(recordType: "Reaction")
+        record["icon"] = react.icon
+        record["count"] = react.count
+        
+        let ref = CKRecord.Reference(record: CKRecord(recordType: "Offenses"), action: .none)
+        
+        try await database.save(record)
+        
+    }
+    
     
     public func saveOff(_ offense: SingleOffense) async throws {
         let record = CKRecord(recordType: "Offenses", recordID: .init(recordName: offense.id))
@@ -26,6 +38,35 @@ class CloudKitService {
         record["date"] = offense.date
         
         try await database.save(record)
+    }
+    public func fetchReactions() async throws -> [Reaction] {
+        
+        let predicate = NSPredicate(value: true)
+        
+        let query = CKQuery(recordType: "Reactions", predicate: predicate)
+        
+       let sortDes = [NSSortDescriptor(key: "count", ascending: false)]
+           
+        query.sortDescriptors = sortDes
+        
+        
+        let (matchResults, _) = try await database.records(matching: query)
+        let results = matchResults.map { matchResult in
+            return matchResult.1
+        }
+        
+        let records = results.compactMap { result in
+            try? result.get()
+            
+        }
+        let Reactions: [Reaction] = records.compactMap { record in
+            guard let icon = record["icon"] as? String,
+                  let count = record["count"] as? Int else {
+                return Reaction(icon: "No name", count: 0)
+            }
+            return Reaction(id: "\(record.recordID.recordName)", icon: icon, count: count)
+        }
+        return Reactions
     }
     
     public func fetchEvents() async throws -> [SingleOffense] {

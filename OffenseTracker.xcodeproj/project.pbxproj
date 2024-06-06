@@ -26,6 +26,7 @@
 		A29186BA2BA0AF60007B8206 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29186B92BA0AF60007B8206 /* SoundManager.swift */; };
 		A29186BC2BA0C983007B8206 /* sus.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A29186BB2BA0C983007B8206 /* sus.mp3 */; };
 		A2ED59662BE1366300A84192 /* womp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2ED59652BE1366200A84192 /* womp.mp3 */; };
+		A2F77FC92C1253510075EA64 /* ReactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F77FC82C1253510075EA64 /* ReactionsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		A29186BB2BA0C983007B8206 /* sus.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sus.mp3; sourceTree = "<group>"; };
 		A293E1A92BA22472001F2462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A2ED59652BE1366200A84192 /* womp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = womp.mp3; sourceTree = "<group>"; };
+		A2F77FC82C1253510075EA64 /* ReactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				A275899C2B7AD6AF00B39EC1 /* ContentView.swift */,
+				A2F77FC82C1253510075EA64 /* ReactionsView.swift */,
 				A2851B312BCEA9010060E5C4 /* SusDog.swift */,
 				A27589C62B7ADB6800B39EC1 /* AddOffense.swift */,
 				A291860D2B9F3A60007B8206 /* Confirmation.swift */,
@@ -341,6 +344,7 @@
 				A2851B322BCEA9010060E5C4 /* SusDog.swift in Sources */,
 				A27589C52B7AD85600B39EC1 /* Offense.swift in Sources */,
 				A275899D2B7AD6AF00B39EC1 /* ContentView.swift in Sources */,
+				A2F77FC92C1253510075EA64 /* ReactionsView.swift in Sources */,
 				A291860E2B9F3A60007B8206 /* Confirmation.swift in Sources */,
 				A27589C72B7ADB6800B39EC1 /* AddOffense.swift in Sources */,
 				A275899B2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift in Sources */,

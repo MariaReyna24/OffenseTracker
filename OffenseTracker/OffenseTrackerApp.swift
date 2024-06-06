@@ -13,7 +13,7 @@ import CoreData
 struct OffenseTrackerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ReactionsView()
         }
     }
 }

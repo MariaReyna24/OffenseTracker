@@ -10,6 +10,19 @@ import CloudKit
 import UserNotifications
 import UIKit
 
+struct Reaction: Identifiable {
+    var id: String
+    var icon: String
+    var count: Int
+    
+    init(id: String = UUID().uuidString, icon: String = "👎", count: Int) {
+        self.id = id
+        self.icon = icon
+        self.count = count
+    }
+}
+
+
 struct SingleOffense: Identifiable {
     var id: String
     var name: String
@@ -34,7 +47,18 @@ class Offenses: ObservableObject{
     @Published var appState: AppState = .loaded
     @Published var listOfOffenses: [SingleOffense] = []
     @Published var addedImage = false
+    @Published var reactions: [Reaction] = []
     
+    func fetchReactions() async throws {
+        
+        do {
+            self.reactions = try await ckService.fetchReactions()
+            appState = .loaded
+        } catch {
+            appState = .failed(error)
+        }
+    }
+
     
     func fetchOffenses() async throws {
         
@@ -130,6 +154,26 @@ class Offenses: ObservableObject{
         }
     }
     
-    
+//    func endOfDayNotification(){
+//        
+//        let center = UNUserNotificationCenter.current()
+//
+//        let content = UNMutableNotificationContent()
+//        content.title = "End of Day Recap"
+//        content.body = "How many times did Miss Bauer mess up today"
+//        //content.categoryIdentifier = "alarm"
+//       // content.userInfo = ["customData": "fizzbuzz"]
+//        content.sound = UNNotificationSound.default
+//
+//        var dateComponents = DateComponents()
+//        dateComponents.hour = 12
+//        dateComponents.minute = 00
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+//
+//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+//        center.add(request)
+//
+//       
+//    }
     
 }

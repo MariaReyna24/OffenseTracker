@@ -68,8 +68,8 @@ struct AddOffense: View {
                 .opacity(newOffense.isEmpty || newOffense.count > 50 ? 0.7: 1.0)
             }
         }
-        
     }
+    
     func addOff(){
         Task {
             do {
