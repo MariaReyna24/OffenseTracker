@@ -24,7 +24,7 @@ class CloudKitService {
         record["icon"] = react.icon
         record["count"] = react.count
         
-        let ref = CKRecord.Reference(record: CKRecord(recordType: "Offenses"), action: .none)
+       // let ref = CKRecord.Reference(record: CKRecord(recordType: "Offenses"), action: .none)
         
         try await database.save(record)
         

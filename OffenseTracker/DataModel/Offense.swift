@@ -11,8 +11,8 @@ import UserNotifications
 import UIKit
 
 struct Reaction: Identifiable {
-    var id: String
-    var icon: String
+    let id: String
+    let icon: String
     var count: Int
     
     init(id: String = UUID().uuidString, icon: String = "👎", count: Int) {
@@ -20,6 +20,7 @@ struct Reaction: Identifiable {
         self.icon = icon
         self.count = count
     }
+    static var example = Reaction(count: 0)
 }
 
 
@@ -47,10 +48,21 @@ class Offenses: ObservableObject{
     @Published var appState: AppState = .loaded
     @Published var listOfOffenses: [SingleOffense] = []
     @Published var addedImage = false
-    @Published var reactions: [Reaction] = []
+    @Published var reactions = [Reaction(count: 0)]
+    
+    func newCountUpdate(count: Int) async {
+        
+        do {
+            let newCount = Reaction(count: count)
+            try await ckService.saveReaction(newCount)
+            appState = .loaded
+        } catch {
+            appState = .failed(error)
+        }
+    }
+    
     
     func fetchReactions() async throws {
-        
         do {
             self.reactions = try await ckService.fetchReactions()
             appState = .loaded
