@@ -84,7 +84,13 @@ struct ContentView: View {
                         List {
                             ForEach(offVM.listOfOffenses) { off in
                                 Text("\(off.name), Reported on \(off.date.formatted())")
-                                
+                                Button {
+                                    Task{
+                                        try await offVM.dislikeIncrement(off)
+                                    }
+                                } label: {
+                                    Text("👎: \(off.dislike)")
+                                }
                             } .onDelete { index in
                                 deletedIndex = index
                                 isAlertShowing.toggle()

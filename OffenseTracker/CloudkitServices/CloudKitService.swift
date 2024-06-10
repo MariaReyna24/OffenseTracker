@@ -24,11 +24,12 @@ class CloudKitService {
         
         record["name"] = offense.name
         record["date"] = offense.date
+        record["dislike"] = offense.dislike
         
         try await database.save(record)
     }
     
-    public func fetchEvents() async throws -> [SingleOffense] {
+    public func fetchOffenses() async throws -> [SingleOffense] {
         
         let predicate = NSPredicate(value: true)
         
@@ -50,10 +51,11 @@ class CloudKitService {
         }
         let offenses: [SingleOffense] = records.compactMap { record in
             guard let name = record["name"] as? String,
-                  let date = record["date"] as? Date else {
-                return SingleOffense(name: "No name", date: Date.now)
+                  let date = record["date"] as? Date,
+                  let dislike = record["dislike"] as? Int else {
+                return SingleOffense(name: "N/A", date: Date.now, dislike: 0)
             }
-            return SingleOffense(id: "\(record.recordID.recordName)", name: name, date: date)
+            return SingleOffense(id: "\(record.recordID.recordName)", name: name, date: date, dislike: dislike)
         }
         return offenses
     }
@@ -77,7 +79,14 @@ class CloudKitService {
         }
         _ = try await database.modifyRecords(saving: [], deleting: [fetchedRecord.recordID])
     }
-   
+    func incrementDislikes(_ offense: SingleOffense) async throws {
+        guard let fetchedRecord = try? await database.record(for: .init(recordName: offense.id)) else {
+            throw CloudKitServiceError.recordNotInDatabase
+        }
+        fetchedRecord["dislike"] = offense.dislike + 1
+        _ = try await database.modifyRecords(saving: [fetchedRecord], deleting: [])
+        
+    }
     
 }
 
