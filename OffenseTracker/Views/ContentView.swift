@@ -13,6 +13,7 @@ import CloudKit
 import CoreData
 
 struct ContentView: View {
+    @State private var scale = 1.0
     @State var hiddenList = false
     @State var deletedIndex: IndexSet?
     @State private var forgive = false
@@ -101,7 +102,8 @@ struct ContentView: View {
                                         forgive.toggle()
                                     }
                                 }
-                            }.opacity(hiddenList ? 0: 1.0)
+                            }
+                            .opacity(hiddenList ? 0: 1.0)
                             .scrollContentBackground(.hidden)
                             .padding()
                             .refreshable {
@@ -117,9 +119,7 @@ struct ContentView: View {
                             .font(.system(size: 35))
                             .foregroundStyle(.white)
                             .buttonStyle(.borderedProminent)
-                            .padding(.all)
-                            .padding()
-                            .padding()
+                            .padding(.bottom, 60)
                             .tint(.black)
                             .sheet(isPresented: $showingSheet){
                                 AddOffense(offVm: offVM, isCopShowing: $isCopShowing)
@@ -141,7 +141,15 @@ struct ContentView: View {
                         }.toolbar{
                             ToolbarItem(placement: .topBarLeading) {
                                 Button {
-                                    hiddenList.toggle()
+                                    withAnimation(.easeInOut(duration: 2)) {
+                                        hiddenList.toggle()
+                                        randomDouble = Double.random(in: 0...360)
+                                        randomPosition = CGPoint(x: Double.random(in: 100...300), y: Double.random(in: 200...500))
+                                        withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true).delay(0.2)) {
+                                            bounce.toggle()
+                                        }
+                                            
+                                    }
                                 } label: {
                                     Text("Admire Sloth")
                                         .foregroundStyle(.white)
@@ -159,16 +167,16 @@ struct ContentView: View {
             }
         }
     }
-        func deleteOff(indes: IndexSet){
-            for index in indes {
-                let offense = offVM.listOfOffenses[index]
-                print(offense)
-                Task {
-                    try await offVM.delete(offense)
-                }
+    func deleteOff(indes: IndexSet){
+        for index in indes {
+            let offense = offVM.listOfOffenses[index]
+            print(offense)
+            Task {
+                try await offVM.delete(offense)
             }
         }
     }
+}
 
 #Preview {
     ContentView()
