@@ -148,7 +148,7 @@ struct ContentView: View {
                                         withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true).delay(0.2)) {
                                             bounce.toggle()
                                         }
-                                            
+                                        sounds.playSound(sound: .itsburning)
                                     }
                                 } label: {
                                     Text("Admire Sloth")

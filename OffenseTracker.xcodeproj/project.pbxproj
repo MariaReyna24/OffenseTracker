@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A25121702C17495000F07E20 /* itsburning.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A251216F2C17495000F07E20 /* itsburning.mp3 */; };
 		A275899B2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A275899A2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift */; };
 		A275899D2B7AD6AF00B39EC1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A275899C2B7AD6AF00B39EC1 /* ContentView.swift */; };
 		A275899F2B7AD6B000B39EC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A275899E2B7AD6B000B39EC1 /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		A222DE732B893E4400575D66 /* OffenseTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OffenseTracker.entitlements; sourceTree = "<group>"; };
+		A251216F2C17495000F07E20 /* itsburning.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = itsburning.mp3; sourceTree = "<group>"; };
 		A27589972B7AD6AF00B39EC1 /* OffenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OffenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A275899A2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffenseTrackerApp.swift; sourceTree = "<group>"; };
 		A275899C2B7AD6AF00B39EC1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				A29186B92BA0AF60007B8206 /* SoundManager.swift */,
+				A251216F2C17495000F07E20 /* itsburning.mp3 */,
 				A29186BB2BA0C983007B8206 /* sus.mp3 */,
 				A2851B2B2BCEA6740060E5C4 /* angels.mp3 */,
 				A2851B2D2BCEA6790060E5C4 /* bam.mp3 */,
@@ -313,6 +316,7 @@
 				A27589A22B7AD6B000B39EC1 /* Preview Assets.xcassets in Resources */,
 				A2851B2C2BCEA6740060E5C4 /* angels.mp3 in Resources */,
 				A275899F2B7AD6B000B39EC1 /* Assets.xcassets in Resources */,
+				A25121702C17495000F07E20 /* itsburning.mp3 in Resources */,
 				A2ED59662BE1366300A84192 /* womp.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,6 +14,7 @@ class SoundManager: ObservableObject {
         case sus
         case angels
         case bam
+        case itsburning
     }
     
     func playSound(sound: Sounds) {
