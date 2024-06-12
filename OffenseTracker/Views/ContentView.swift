@@ -70,7 +70,7 @@ struct ContentView: View {
                             .resizable()
                             .scaledToFill()
                             .ignoresSafeArea()
-                        Image(.loneSloth)
+                        Image(offVM.hasBeenInfracted ? .cursedSloth : .loneSloth)
                             .resizable()
                             .scaledToFit()
                             .rotationEffect(.degrees(randomDouble))
@@ -103,7 +103,7 @@ struct ContentView: View {
                                     }
                                 }
                             }
-                            .opacity(hiddenList ? 0: 1.0)
+                            .opacity(hiddenList || offVM.hasBeenInfracted ? 0: 1.0)
                             .scrollContentBackground(.hidden)
                             .padding()
                             .refreshable {
@@ -112,14 +112,31 @@ struct ContentView: View {
                             .task {
                                 try? await offVM.fetchOffenses()
                             }
-                            
+                            Button {
+                                withAnimation(.easeInOut(duration: 2)) {
+                                    hiddenList.toggle()
+                                    randomDouble = Double.random(in: 0...360)
+                                    randomPosition = CGPoint(x: Double.random(in: 100...300), y: Double.random(in: 200...500))
+                                    withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true).delay(0.2)) {
+                                        bounce.toggle()
+                                    }
+                                    sounds.playSound(sound: .itsburning)
+                                }
+                            } label: {
+                                Text("Admire Sloth")
+                                    .foregroundStyle(.white)
+                            }
+                            .font(.system(size: 33))
+                            .foregroundStyle(.white)
+                            .buttonStyle(.borderedProminent)
+                            .tint(.black)
                             Button("Add offense") {
                                 showingSheet.toggle()
                             }
                             .font(.system(size: 35))
                             .foregroundStyle(.white)
                             .buttonStyle(.borderedProminent)
-                            .padding(.bottom, 60)
+                            .padding(.bottom, 20)
                             .tint(.black)
                             .sheet(isPresented: $showingSheet){
                                 AddOffense(offVm: offVM, isCopShowing: $isCopShowing)
@@ -138,28 +155,14 @@ struct ContentView: View {
                                         })
                                     }
                             }
-                        }.toolbar{
-                            ToolbarItem(placement: .topBarLeading) {
-                                Button {
-                                    withAnimation(.easeInOut(duration: 2)) {
-                                        hiddenList.toggle()
-                                        randomDouble = Double.random(in: 0...360)
-                                        randomPosition = CGPoint(x: Double.random(in: 100...300), y: Double.random(in: 200...500))
-                                        withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true).delay(0.2)) {
-                                            bounce.toggle()
-                                        }
-                                        sounds.playSound(sound: .itsburning)
-                                    }
-                                } label: {
-                                    Text("Admire Sloth")
-                                        .foregroundStyle(.white)
-                                }
-                                
-                            }
-                            
                         }
                     }.onAppear {
                         offVM.requestNotifPermission()
+                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4, execute: {
+                                    withAnimation(.easeIn(duration: 4)){
+                                        offVM.hasBeenInfracted = false
+                                    }
+                                })
                     }
                 case .failed(let error):
                     Text("Something bad happened oops: \(error.localizedDescription)")

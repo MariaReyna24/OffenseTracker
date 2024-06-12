@@ -30,7 +30,7 @@ class Offenses: ObservableObject{
         case loading, loaded, failed(Error)
     }
     private let ckService = CloudKitService()
-    
+    @Published var hasBeenInfracted = false
     @Published var appState: AppState = .loaded
     @Published var listOfOffenses: [SingleOffense] = []
     @Published var addedImage = false

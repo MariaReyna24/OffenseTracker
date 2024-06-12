@@ -52,6 +52,7 @@ struct AddOffense: View {
                 Button(action: {
                     addOff()
                     dismiss()
+                    offVm.hasBeenInfracted.toggle()
                     withAnimation(.easeInOut(duration: 2)) {
                         isCopShowing.toggle()
                     }
