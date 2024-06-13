@@ -79,11 +79,21 @@ class CloudKitService {
         }
         _ = try await database.modifyRecords(saving: [], deleting: [fetchedRecord.recordID])
     }
-    func incrementDislikes(_ offense: SingleOffense) async throws {
+    
+//    public func localDislikeToCloud(_ offense: SingleOffense, localDis: Int) async throws {
+//        guard let fetchedRecord = try? await database.record(for: .init(recordName: offense.id)) else {
+//            throw CloudKitServiceError.recordNotInDatabase
+//        }
+//        var local = localDis
+//        fetchedRecord["dislike"] = local
+//        _ = try await database.modifyRecords(saving: [fetchedRecord], deleting: [])
+//    }
+    
+   public func incrementDislikes(_ offense: SingleOffense) async throws {
         guard let fetchedRecord = try? await database.record(for: .init(recordName: offense.id)) else {
             throw CloudKitServiceError.recordNotInDatabase
         }
-        fetchedRecord["dislike"] = offense.dislike + 1
+        fetchedRecord["dislike"] = (offense.dislike) + 1
         _ = try await database.modifyRecords(saving: [fetchedRecord], deleting: [])
         
     }

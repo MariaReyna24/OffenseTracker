@@ -10,6 +10,7 @@ import CloudKit
 import UserNotifications
 import UIKit
 
+
 struct SingleOffense: Identifiable {
     var id: String
     var name: String
@@ -29,7 +30,7 @@ struct SingleOffense: Identifiable {
 
 @MainActor
 class Offenses: ObservableObject{
-    
+   
     enum AppState {
         case loading, loaded, failed(Error)
     }

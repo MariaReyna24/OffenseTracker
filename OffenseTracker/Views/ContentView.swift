@@ -13,6 +13,7 @@ import CloudKit
 import CoreData
 
 struct ContentView: View {
+    @State var localDislikes: Int
     @State var deletedIndex: IndexSet?
     @State private var forgive = false
     @State var showingSheet = false
@@ -85,7 +86,7 @@ struct ContentView: View {
                             ForEach(offVM.listOfOffenses) { off in
                                 Text("\(off.name), Reported on \(off.date.formatted())")
                                 Button {
-                                    Task{
+                                    Task {
                                         try await offVM.dislikeIncrement(off)
                                     }
                                 } label: {
@@ -146,6 +147,8 @@ struct ContentView: View {
                     }
                 }.onAppear {
                     offVM.requestNotifPermission()
+                    UIRefreshControl.appearance().tintColor = .green
+                    
                 }
             case .failed(let error):
                 Text("Something bad happened oops: \(error.localizedDescription)")
@@ -165,5 +168,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(localDislikes: 0)
 }
