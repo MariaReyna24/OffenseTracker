@@ -86,8 +86,8 @@ struct ContentView: View {
                             ForEach(offVM.listOfOffenses) { off in
                                 Text("\(off.name), Reported on \(off.date.formatted())")
                                 Button {
-                                    Task {
-                                        try await offVM.dislikeIncrement(off)
+                                    Task{
+                                        try await offVM.incrementDislike(for: off)
                                     }
                                 } label: {
                                     Text("👎: \(off.dislike)")
@@ -152,6 +152,14 @@ struct ContentView: View {
                 }
             case .failed(let error):
                 Text("Something bad happened oops: \(error.localizedDescription)")
+                    .padding(.bottom)
+                Button{
+                    Task{
+                        try? await offVM.fetchOffenses()
+                    }
+                } label: {
+                    Text("Retry")
+                }
             }
             
         }
@@ -165,6 +173,7 @@ struct ContentView: View {
             }
         }
     }
+    
 }
 
 #Preview {

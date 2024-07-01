@@ -25,7 +25,6 @@ struct SingleOffense: Identifiable {
         self.dislike = dislike
      
     }
-//    static var exampleOff = [SingleOffense(name: "Burnt my shake", date: Date.now), SingleOffense(name: "Another 1", date: Date.now)]
 }
 
 @MainActor
@@ -40,10 +39,17 @@ class Offenses: ObservableObject{
     @Published var listOfOffenses: [SingleOffense] = []
     @Published var addedImage = false
     
-    func dislikeIncrement(_ offense: SingleOffense) async throws {
-        try await ckService.incrementDislikes(offense)
+   
+    func incrementDislike(for offense: SingleOffense) async throws {
+            if let index = listOfOffenses.firstIndex(where: { $0.id == offense.id }) {
+                listOfOffenses[index].dislike += 1
+                do {
+                    try await ckService.incrementDislikes(offense, localDislike:  listOfOffenses[index].dislike)     
+                }
+                }
+            }
         
-    }
+    
     func fetchOffenses() async throws {
         
         do {
@@ -54,7 +60,7 @@ class Offenses: ObservableObject{
         }
     }
     
-    func saveNewEvent(withName name: String, date: Date, dislike: Int) async throws {
+    func saveNewOffense(withName name: String, date: Date, dislike: Int) async throws {
         appState = .loading
         do {
             let off = SingleOffense(name: name, date: date, dislike: dislike)

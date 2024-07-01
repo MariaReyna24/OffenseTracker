@@ -35,8 +35,8 @@ class CloudKitService {
         
         let query = CKQuery(recordType: "Offenses", predicate: predicate)
         
-       let sortDes = [NSSortDescriptor(key: "date", ascending: false)]
-           
+        let sortDes = [NSSortDescriptor(key: "date", ascending: false)]
+        
         query.sortDescriptors = sortDes
         
         
@@ -80,23 +80,15 @@ class CloudKitService {
         _ = try await database.modifyRecords(saving: [], deleting: [fetchedRecord.recordID])
     }
     
-//    public func localDislikeToCloud(_ offense: SingleOffense, localDis: Int) async throws {
-//        guard let fetchedRecord = try? await database.record(for: .init(recordName: offense.id)) else {
-//            throw CloudKitServiceError.recordNotInDatabase
-//        }
-//        var local = localDis
-//        fetchedRecord["dislike"] = local
-//        _ = try await database.modifyRecords(saving: [fetchedRecord], deleting: [])
-//    }
+       
     
-   public func incrementDislikes(_ offense: SingleOffense) async throws {
-        guard let fetchedRecord = try? await database.record(for: .init(recordName: offense.id)) else {
-            throw CloudKitServiceError.recordNotInDatabase
-        }
-        fetchedRecord["dislike"] = (offense.dislike) + 1
-        _ = try await database.modifyRecords(saving: [fetchedRecord], deleting: [])
-        
-    }
-    
+    public func incrementDislikes(_ offense: SingleOffense, localDislike: Int) async throws {
+           guard let fetchedRecord = try? await database.record(for: .init(recordName: offense.id)) else {
+               throw CloudKitServiceError.recordNotInDatabase
+           }
+           fetchedRecord["dislike"] = localDislike
+           _ = try await database.modifyRecords(saving: [fetchedRecord], deleting: [])
+           
+       }
+  
 }
-
