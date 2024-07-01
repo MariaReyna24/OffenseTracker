@@ -88,7 +88,13 @@ struct ContentView: View {
                             List {
                                 ForEach(offVM.listOfOffenses) { off in
                                     Text("\(off.name), Reported on \(off.date.formatted())")
-                                    
+                                    Button {
+                                        Task{
+                                            try await offVM.incrementDislike(for: off)
+                                        }
+                                    } label: {
+                                        Text("👎: \(off.dislike)")
+                                    }
                                 } .onDelete { index in
                                     deletedIndex = index
                                     isAlertShowing.toggle()
@@ -159,41 +165,39 @@ struct ContentView: View {
                         }
                     }.onAppear {
                         offVM.requestNotifPermission()
-                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4, execute: {
-                                    withAnimation(.easeIn(duration: 4)){
-                                        offVM.hasBeenInfracted = false
-                                    }
-                                })
+                        UIRefreshControl.appearance().tintColor = .white
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4, execute: {
+                            withAnimation(.easeIn(duration: 4)){
+                                offVM.hasBeenInfracted = false
+                            }
+                        })
                     }
-                }.onAppear {
-                    offVM.requestNotifPermission()
-                    UIRefreshControl.appearance().tintColor = .green
                     
-                }
-            case .failed(let error):
-                Text("Something bad happened oops: \(error.localizedDescription)")
-                    .padding(.bottom)
-                Button{
-                    Task{
-                        try? await offVM.fetchOffenses()
+                case .failed(let error):
+                    Text("Something bad happened oops: \(error.localizedDescription)")
+                        .padding(.bottom)
+                    Button{
+                        Task{
+                            try? await offVM.fetchOffenses()
+                        }
+                    } label: {
+                        Text("Retry")
                     }
-                } label: {
-                    Text("Retry")
                 }
             }
         }
     }
-    func deleteOff(indes: IndexSet){
-        for index in indes {
-            let offense = offVM.listOfOffenses[index]
-            print(offense)
-            Task {
-                try await offVM.delete(offense)
+        func deleteOff(indes: IndexSet){
+            for index in indes {
+                let offense = offVM.listOfOffenses[index]
+                print(offense)
+                Task {
+                    try await offVM.delete(offense)
+                }
             }
         }
+        
     }
-    
-}
 
 #Preview {
     ContentView(localDislikes: 0)
