@@ -15,6 +15,7 @@ import CoreData
 struct ContentView: View {
     @State private var scale = 1.0
     @State var hiddenList = false
+    @State var localDislikes: Int
     @State var deletedIndex: IndexSet?
     @State private var forgive = false
     @State var showingSheet = false
@@ -164,8 +165,20 @@ struct ContentView: View {
                                     }
                                 })
                     }
-                case .failed(let error):
-                    Text("Something bad happened oops: \(error.localizedDescription)")
+                }.onAppear {
+                    offVM.requestNotifPermission()
+                    UIRefreshControl.appearance().tintColor = .green
+                    
+                }
+            case .failed(let error):
+                Text("Something bad happened oops: \(error.localizedDescription)")
+                    .padding(.bottom)
+                Button{
+                    Task{
+                        try? await offVM.fetchOffenses()
+                    }
+                } label: {
+                    Text("Retry")
                 }
             }
         }
@@ -179,8 +192,9 @@ struct ContentView: View {
             }
         }
     }
+    
 }
 
 #Preview {
-    ContentView()
+    ContentView(localDislikes: 0)
 }
