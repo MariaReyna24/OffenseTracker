@@ -26,6 +26,7 @@
 		A29186802BA090DB007B8206 /* Vortex in Frameworks */ = {isa = PBXBuildFile; productRef = A291867F2BA090DB007B8206 /* Vortex */; };
 		A29186BA2BA0AF60007B8206 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29186B92BA0AF60007B8206 /* SoundManager.swift */; };
 		A29186BC2BA0C983007B8206 /* sus.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A29186BB2BA0C983007B8206 /* sus.mp3 */; };
+		A2E6F6412C33163C00EEA3CB /* CommentSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E6F6402C33163C00EEA3CB /* CommentSectionView.swift */; };
 		A2ED59662BE1366300A84192 /* womp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2ED59652BE1366200A84192 /* womp.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		A29186B92BA0AF60007B8206 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		A29186BB2BA0C983007B8206 /* sus.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sus.mp3; sourceTree = "<group>"; };
 		A293E1A92BA22472001F2462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A2E6F6402C33163C00EEA3CB /* CommentSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSectionView.swift; sourceTree = "<group>"; };
 		A2ED59652BE1366200A84192 /* womp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = womp.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -185,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				A275899C2B7AD6AF00B39EC1 /* ContentView.swift */,
+				A2E6F6402C33163C00EEA3CB /* CommentSectionView.swift */,
 				A2851B312BCEA9010060E5C4 /* SusDog.swift */,
 				A27589C62B7ADB6800B39EC1 /* AddOffense.swift */,
 				A291860D2B9F3A60007B8206 /* Confirmation.swift */,
@@ -350,6 +353,7 @@
 				A275899B2B7AD6AF00B39EC1 /* OffenseTrackerApp.swift in Sources */,
 				A2851B2A2BCEA5EE0060E5C4 /* Forgiveness.swift in Sources */,
 				A29186BA2BA0AF60007B8206 /* SoundManager.swift in Sources */,
+				A2E6F6412C33163C00EEA3CB /* CommentSectionView.swift in Sources */,
 				A2851B342BCEABEA0060E5C4 /* CloudKitService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
